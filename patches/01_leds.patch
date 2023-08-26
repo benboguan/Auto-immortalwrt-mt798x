@@ -1,0 +1,13 @@
+--- a/target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
++++ b/target/linux/ramips/mt7621/base-files/etc/board.d/01_leds
+@@ -138,8 +138,8 @@ oraybox,x3a)
+ 	ucidef_set_led_netdev "lan" "lan link" "green:status" "br-lan"
+ 	;;
+ raisecom,msg1500-x-00)
+-	ucidef_set_led_netdev "wlan2g" "WiFi 2.4GHz" "blue:wlan2g" "wlan0"
+-	ucidef_set_led_netdev "wlan5g" "WiFi 5GHz" "blue:wlan5g"  "wlan1"
++	ucidef_set_led_netdev "wlan2g" "WiFi 2.4GHz" "blue:wlan2g" "ra0"
++	ucidef_set_led_netdev "wlan5g" "WiFi 5GHz" "blue:wlan5g"  "rax0"
+ 	;;
+ tplink,archer-a6-v3|\
+ tplink,archer-c6-v3|\

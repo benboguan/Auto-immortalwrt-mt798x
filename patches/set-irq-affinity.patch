@@ -1,0 +1,14 @@
+--- a/target/linux/ramips/mt7621/base-files/etc/init.d/set-irq-affinity
++++ b/target/linux/ramips/mt7621/base-files/etc/init.d/set-irq-affinity
+@@ -1,8 +1,11 @@
+ #!/bin/sh /etc/rc.common
++#MTK-Wi-Fi
+ 
+ START=99
+ 
+ start() {
++	/sbin/mtk-wifi.sh &
++
+ 	if grep -q 'processor.*: 2' /proc/cpuinfo; then
+ 		mask=4
+ 	elif grep -q 'processor.*: 1' /proc/cpuinfo; then
