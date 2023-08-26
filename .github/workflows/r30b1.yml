@@ -18,7 +18,7 @@ on:
 
 env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
-  REPO_BRANCH: clt-30b1
+  REPO_BRANCH: clt-r30b1
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/r30b1.config
   DIY_P1_SH: script/diy-part1.sh
