@@ -8,11 +8,9 @@
 #修改以下代码或者开启触发开关都好，要严格按格式对好,前面有多少空格也要看清楚
 #代码里有 name: 后面的内容随便改,冒号后面是有个空格的,如果修改固件名字就要考虑能不能显示出你想要的
 
-
-name: immortalwrt-mt798x-r30b1 闭源固件
+name: clt-r30b1-hanwckf 闭源固件
 
 on: 
-
   repository_dispatch:
   workflow_dispatch:
     inputs:
@@ -196,7 +194,7 @@ jobs:
       uses: dev-drprasad/delete-older-releases@v0.2.1
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        keep_latest: 3
+        keep_latest: 6
         delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
