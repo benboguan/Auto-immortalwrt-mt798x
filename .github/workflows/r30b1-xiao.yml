@@ -35,6 +35,8 @@ env:
   UPLOAD_RELEASE: true
   UPLOAD_PACKAGES: false
   TZ: Europe/Paris
+  ###############Name##############
+  OPENWRT_NAME: hanwckf
 
 jobs:
   build:
