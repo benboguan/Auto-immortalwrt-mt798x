@@ -6,11 +6,11 @@ on:
     
 jobs:
   del_runs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
     
     - name: 删除工作流
-      uses: fxonei/delete-workflow-runs@main
+      uses: GitRML/delete-workflow-runs@main
       with:
         retain_days: 5
         keep_minimum_runs: 0
