@@ -37,6 +37,7 @@ env:
   TZ: Europe/Paris
   ###############Name##############
   OPENWRT_NAME: hanwckf
+  DEVICE_NAME: clt_r30b1
 
 jobs:
   build:
