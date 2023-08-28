@@ -39,7 +39,7 @@ jobs:
     
     steps:
     - name: 检查项目分支
-      uses: actions/checkout@v3
+      uses: actions/checkout@main
 
     - name: 初始化编译环境
       env:
@@ -100,7 +100,7 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
       
     - name: 上传uboot到Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: ${{ env.FILE_DATE }}-${{ env.OPENWRT_NAME }}-${{ env.DEVICE_NAME }}
@@ -117,7 +117,7 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
         
     - name: 发布至release
-      uses: softprops/action-gh-release@v3
+      uses: softprops/action-gh-release@main
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
