@@ -33,8 +33,9 @@ env:
   UPLOAD_RELEASE: true
   UPLOAD_PACKAGES: false
   TZ: Europe/Paris
-  ###############Name##############
+  ###############改名字##############
   OPENWRT_NAME: hanwckf
+  DEVICE_NAME: mt7981-clt-r30b1
 
 jobs:
   build:
@@ -42,21 +43,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: 清理可用磁盘空间 (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: true
-        
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        swap-storage: true
-
     - name: 准备
       uses: actions/checkout@main
 
@@ -151,8 +137,6 @@ jobs:
       run: | 
         cd openwrt/bin/targets/*/*
         rm -rf packages
-        sudo -E apt-get -y install rename
-        rename 's/.*${{ env.TARGET_NAME }}/${{ env.FILE_DATE }}-${{ env.OPENWRT_NAME }}/' *
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
@@ -160,14 +144,14 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: ${{ env.FILE_DATE }}-${{ env.OPENWRT_NAME }}-${{ env.DEVICE_NAME }}
+        name: OpenWrt_firmware-${{ env.DEVICE_NAME }}-${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: 生成release标签
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-        echo "release_tag=${{ env.FILE_DATE }}-${{ env.OPENWRT_NAME }}-${{ env.DEVICE_NAME }}" >> $GITHUB_OUTPUT
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-clt-r30b1-xiao">> $GITHUB_OUTPUT
         touch release.txt
         echo "clt-r30b1" >> release.txt
         echo "📥 精简固件下载" >> release.txt
@@ -179,16 +163,15 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        files: ${{ env.FIRMWARE }}/*
-        name: ${{ env.FILE_DATE }}-${{ env.OPENWRT_NAME }}-${{ env.DEVICE_NAME }}
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
+        files: ${{ env.FIRMWARE }}/*
 
     - name: 移除旧文件
       uses: chika0801/delete-workflow-runs@main
       with:
         retain_days: 1
-        keep_minimum_runs: 3
+        keep_minimum_runs: 6
 
     - name: 移除以前的Releases
       uses: dev-drprasad/delete-older-releases@v0.2.1
