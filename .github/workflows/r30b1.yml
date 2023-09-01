@@ -167,10 +167,10 @@ jobs:
         files: ${{ env.FIRMWARE }}/*
 
     - name: 移除旧文件
-      uses: chika0801/delete-workflow-runs@main
+      uses: c-hive/gha-remove-artifacts@v1.2.0
       with:
-        retain_days: 1
-        keep_minimum_runs: 6
+        age: '1 day'
+        skip-recent: 6
 
     - name: 移除以前的Releases
       uses: dev-drprasad/delete-older-releases@v0.2.1
