@@ -45,8 +45,8 @@ pushd package/community
 # Add Lienol's Packages
 #git clone --depth=1 https://github.com/Lienol/openwrt-package
 
-# Add luci-app-advanced
-#git clone --depth=1 https://github.com/sirpdboy/luci-app-advanced
+# Add luci-app-pptp-server
+#git clone --depth=1 https://github.com/xkstudio/luci-app-pptp-server
 
 # Add luci-app-eqos
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-eqos
@@ -86,7 +86,7 @@ pushd package/community
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 
 # luci-app-pptpd
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptpd
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptpd
 
 # Add luci-app-pushbot
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pushbot
