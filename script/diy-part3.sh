@@ -85,6 +85,9 @@ pushd package/community
 # luci-app-pptp-server
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 
+# luci-app-pptpd
+svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptpd
+
 # Add luci-app-pushbot
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pushbot
 
