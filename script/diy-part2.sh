@@ -85,6 +85,12 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
 
+# Add luci-app-pbr
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
+
+# luci-app-pptp-server
+svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
+
 # Add luci-app-pushbot
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pushbot
 
