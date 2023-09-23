@@ -10,7 +10,7 @@
 
 name: clt-r30b1-hanwckf 闭源固件
 
-permissions: write-all
+#permissions: write-all
 #开启写权限，防止无法上传到release
 
 on: 
@@ -33,8 +33,8 @@ env:
   DIY_P1_SH: script/diy-part1.sh
   DIY_P2_SH: script/diy-part2.sh
   SSH_ACTIONS: false
-  UPLOAD_BIN_DIR: false
-  UPLOAD_FIRMWARE: false
+  UPLOAD_BIN_DIR: true
+  UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
@@ -56,10 +56,16 @@ jobs:
         sudo -E apt-get -y autoremove
         sudo -E apt-get autoclean
         sudo timedatectl set-timezone "$TZ"
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
+
+    - name: 检查空间使用情况
+      if: (!cancelled())
+      run: df -hT
 
     - name: 下载固件源码
+      working-directory: /workdir
       run: |
-        df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
@@ -67,7 +73,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt21'
+        mixkey: 'openwrt21-a53'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
@@ -130,14 +136,20 @@ jobs:
       if: steps.compile.outputs.status == 'success'
       run: |
         cd openwrt/bin/targets/*/*
-        rm -rf *.bin
         rm -rf *.buildinfo 
         rm -rf *.json 
         rm -rf *.manifest 
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
-        echo "status=success" >>$GITHUB_OUTPUT
-    
+        echo "status=success" >> $GITHUB_OUTPUT
+        
+    - name: 上传.config配置文件在github空间    
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_CONFIG == 'true'
+      uses: actions/upload-artifact@main
+      with:
+        name: config.buildinfo_${{ env.FILE_DATE }}
+        path: ./config    
+
     - name: 上传固件目录
       uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
@@ -149,6 +161,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && steps.compile.outputs.status == 'success' && !cancelled()
       run: |
+        echo -e "✅ immortalwrt-mt798x 源码版本，256M运存建议时常重启一次，不然容易出现爆运存导致卡网" >> release.txt
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")-clt-r30b1">> $GITHUB_OUTPUT
         touch release.txt
         echo "clt-r30b1" >> release.txt
