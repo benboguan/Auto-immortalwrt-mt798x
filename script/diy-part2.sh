@@ -94,13 +94,16 @@ pushd package/community
 # Add luci-app-pbr
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
 
-# luci-app-pptp-server
+# add luci-app-pptp-server
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 
-# luci-app-pptpd
+# add luci-app-pptpd
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptpd
 
-# luci-app-quickstart
+# add quickstart
+svn co https://github.com/kiddin9/openwrt-packages/trunk/quickstart
+
+# add luci-app-quickstart
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-quickstart
 
 # Add luci-app-pushbot
