@@ -38,6 +38,10 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 #修正连接数
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
+###### 取消bootstrap为默认主题 ######
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+
+
 # Clone community packages to package/community
 mkdir package/community
 pushd package/community
@@ -79,8 +83,9 @@ pushd package/community
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/iptvhelper
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
 
-# Add luci-app-pbr
-#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
+# Add luci-app-ttyd
+rm -rf ./feeds/luci/applications/luci-app-ttyd
+svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ttyd
 
 # luci-app-pptp-server
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
@@ -93,6 +98,9 @@ svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 
 # Add luci-app-nat6-helper
 #git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
+
+# default luci-theme-argon
+rm -rf ./feeds/luci/themes/luci-theme-bootstrap
 
 # Add luci-theme-argon
 #cd lede/package/lean
