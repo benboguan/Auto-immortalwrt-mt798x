@@ -110,8 +110,8 @@ svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-quickstart
 
 # add msd_lite
-rm -rf feeds/packages/net/msd_lite
-git clone --depth=1 https://github.com/rozhuk-im/msd_lite
+#rm -rf feeds/packages/net/msd_lite
+#git clone --depth=1 https://github.com/rozhuk-im/msd_lite
 
 # add luci-app-msd_lite
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-msd_lite
