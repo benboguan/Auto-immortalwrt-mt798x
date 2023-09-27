@@ -95,16 +95,22 @@ pushd package/community
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
 
 # add luci-app-pptp-server
-#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
+svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 
 # add luci-app-pptpd
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptpd
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptpd
 
 # add quickstart
-svn co https://github.com/kiddin9/openwrt-packages/trunk/quickstart
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/quickstart
 
 # add luci-app-quickstart
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-quickstart
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-quickstart
+
+# add msd_lite
+git clone --depth=1 https://github.com/rozhuk-im/msd_lite
+
+# add luci-app-msd_lite
+svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-msd_lite
 
 # Add luci-app-pushbot
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pushbot
@@ -113,7 +119,9 @@ svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-quickstart
 git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 
 # default luci-theme-argon
-rm -rf ./feeds/luci/themes/luci-theme-bootstrap 
+rm -rf ./feeds/luci/themes/luci-theme-bootstrap
+rm -rf ./feeds/luci/themes/luci-theme-argon
+git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 
 # Add luci-theme-argon
 #cd lede/package/lean
