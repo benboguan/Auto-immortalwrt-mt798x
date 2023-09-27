@@ -57,9 +57,6 @@ pushd package/community
 # Add Lienol's Packages
 #git clone --depth=1 https://github.com/Lienol/openwrt-package
 
-# Add luci-app-pptp-server
-#git clone --depth=1 https://github.com/xkstudio/luci-app-pptp-server
-
 # Add luci-app-eqos
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-eqos
 
@@ -67,8 +64,9 @@ pushd package/community
 #git clone --depth=1 https://github.com/garypang13/luci-app-dnsfilter
 
 # Add luci-app-passwall
-#svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-passwall
-#git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
+rm -rf feeds/luci/applications/luci-app-passwall
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
 
 # Add luci-app-vssr <M>
 #git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb.git
