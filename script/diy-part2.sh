@@ -90,7 +90,7 @@ git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
 
 # Add luci-app-easymesh
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-easymesh
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-easymesh
 
 # Add luci-app-pbr
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
