@@ -64,7 +64,7 @@ pushd package/community
 #git clone --depth=1 https://github.com/garypang13/luci-app-dnsfilter
 
 # Add luci-app-passwall
-rm -rf feeds/luci/applications/luci-app-passwall
+rm -rf ../../../feeds/luci/applications/luci-app-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
 
@@ -90,7 +90,7 @@ git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
 
 # Add luci-app-easymesh
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-easymesh
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-easymesh
 
 # Add luci-app-pbr
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
@@ -108,10 +108,11 @@ svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-quickstart
 
 # add msd_lite
-#rm -rf feeds/packages/net/msd_lite
+#rm -rf ../../../feeds/packages/net/msd_lite
 #git clone --depth=1 https://github.com/rozhuk-im/msd_lite
 
 # add luci-app-msd_lite
+#rm -rf ../../../feeds/luci/applications/luci-app-msd_lite
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-msd_lite
 
 # Add luci-app-pushbot
@@ -121,8 +122,8 @@ svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 
 # default luci-theme-argon
-rm -rf feeds/luci/themes/luci-theme-bootstrap
-rm -rf feeds/luci/themes/luci-theme-argon
+rm -rf ../../../feeds/luci/themes/luci-theme-bootstrap
+rm -rf ../../../feeds/luci/themes/luci-theme-argon
 git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 
 # Add luci-theme-argon
