@@ -41,21 +41,9 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 ###### 取消bootstrap为默认主题 ######
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
-###### 取消bootstrap为默认主题 删除原luci中的argon ######
-sed -i 's/luci-theme-argon/luci-theme-argon-mod/g' feeds/luci/themes/luci-theme-argon
-git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
-
 ###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
-sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
-git clone --depth=1 https://github.com/kenzok8/small
-
-###### 删除原luci中的luci-app-adbyby-plus 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
-sed -i 's/luci-app-adbyby-plus/luci-app-adbyby-plus-mod/g' feeds/luci/applications/luci-app-adbyby-plus/Makefile
-git clone --depth=1 https://github.com/benboguan/immortalwrt-luci/tree/openwrt-21.02/applications/luci-app-adbyby-plus
-
-###### 删除原luci中的luci-app-ddns 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
-sed -i 's/luci-app-ddns/luci-app-ddns-mod/g' feeds/luci/applications/luci-app-ddns/Makefile
-git clone --depth=1 https://github.com/benboguan/immortalwrt-luci/tree/openwrt-21.02/applications/luci-app-ddns
+#sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
+#git clone --depth=1 https://github.com/kenzok8/small
 
 # 01_leds
 #patch -p1 -i ../patches/01_leds.patch
@@ -83,6 +71,7 @@ pushd package/community
 #rm -rf feeds/luci/applications/luci-app-passwall
 #git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
 #git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
+git clone --depth=1 https://github.com/kenzok8/small
 
 # Add luci-app-vssr <M>
 #git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb.git
@@ -138,8 +127,8 @@ git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 
 # default luci-theme-argon
 #rm -rf feeds/luci/themes/luci-theme-bootstrap
-rm -rf feeds/luci/themes/luci-theme-argon
-#git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
+#rm -rf feeds/luci/themes/luci-theme-argon
+git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 
 # Add luci-theme-argon
 #cd lede/package/lean
