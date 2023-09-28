@@ -51,11 +51,11 @@ git clone --depth=1 https://github.com/kenzok8/small
 
 ###### 删除原luci中的luci-app-adbyby-plus 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
 sed -i 's/luci-app-adbyby-plus/luci-app-adbyby-plus-mod/g' feeds/luci/applications/luci-app-adbyby-plus/Makefile
-svn co https://github.com/benboguan/immortalwrt-luci/trunk/openwrt-21.02/applications/luci-app-adbyby-plus
+svn co https://github.com/benboguan/immortalwrt-luci/tree/openwrt-21.02/applications/luci-app-adbyby-plus
 
 ###### 删除原luci中的luci-app-ddns 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
 sed -i 's/luci-app-ddns/luci-app-ddns-mod/g' feeds/luci/applications/luci-app-ddns/Makefile
-svn co https://github.com/benboguan/immortalwrt-luci/trunk/openwrt-21.02/applications/luci-app-ddns
+svn co https://github.com/benboguan/immortalwrt-luci/tree/openwrt-21.02/applications/luci-app-ddns
 
 # 01_leds
 #patch -p1 -i ../patches/01_leds.patch
