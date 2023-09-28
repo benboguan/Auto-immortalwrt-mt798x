@@ -42,7 +42,7 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 ###### 取消bootstrap为默认主题 删除原luci中的argon ######
-sed -i 's/luci-theme-argon/luci-theme-argon-mod/g' feeds/luci/themes/luci-theme-argon/Makefile
+sed -i 's/Argon Theme/Argon Theme mod/g' feeds/luci/themes/luci-theme-argon/Makefile
 git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 
 ###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
