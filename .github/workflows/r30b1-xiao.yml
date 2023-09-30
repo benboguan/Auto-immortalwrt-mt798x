@@ -44,9 +44,12 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: 准备并清理磁盘空间
+    - name: 准备
       uses: actions/checkout@main
-      run: script/github-disk-cleanup.sh
+      
+    - name: 检查磁盘空间
+      run: |
+        script/github-disk-cleanup.sh
 
     - name: 开始安装编译所需系统
       env:
