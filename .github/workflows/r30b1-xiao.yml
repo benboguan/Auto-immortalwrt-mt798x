@@ -49,7 +49,7 @@ jobs:
       uses: actions/checkout@main
       
     - name: 清理磁盘空间
-      run:  github-disk-cleanup.sh
+      run:  script/github-disk-cleanup.sh
 
     - name: 开始安装编译所需系统
       env:
