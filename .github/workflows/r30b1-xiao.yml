@@ -32,6 +32,7 @@ env:
   CONFIG_FILE: config/r30b1-xiao.config
   DIY_P1_SH: script/diy-part1.sh
   DIY_P2_SH: script/diy-part2.sh
+  DIY_P3_SH: script/github-disk-cleanup.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
@@ -47,9 +48,11 @@ jobs:
     - name: 准备
       uses: actions/checkout@main
       
-    - name: 检查磁盘空间
+    - name: 清理磁盘空间
       run: |
-        script/github-disk-cleanup.sh
+        chmod +x $DIY_P3_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$DIY_P3_SH
 
     - name: 开始安装编译所需系统
       env:
