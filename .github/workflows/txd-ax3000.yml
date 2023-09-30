@@ -43,8 +43,28 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: 准备
-      uses: actions/checkout@main
+    - name: 可用磁盘空间 (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: true
+        
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
+        
+    - name: 检查
+      uses: actions/checkout@v3.1.0  
+      
+    - name: 磁盘空间
+      run: |
+           echo "Free space:"
+           df -h
 
     - name: 开始安装编译所需系统
       env:
@@ -57,10 +77,6 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-
-    - name: 检查空间使用情况
-      if: (!cancelled())
-      run: df -hT
 
     - name: 下载固件源码
       working-directory: /workdir
