@@ -10,7 +10,8 @@
 
 name: clt-r30b1-hanwckf 闭源固件
 
-name: OpenWrt-msg1500 5.10内核闭源固件
+#permissions: write-all
+#开启写权限，防止无法上传到release
 
 on: 
   repository_dispatch:
