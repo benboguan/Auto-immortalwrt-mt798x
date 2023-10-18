@@ -42,7 +42,7 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 ###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
-rm -rf ./feeds/packages/lang/golang
+rm -rf ./feeds/packages/lang/golang && svn co https://github.com/immortalwrt/packages/trunk/lang/golang feeds/packages/lang/golang
 rm -rf ./feeds/luci/applications/luci-app-passwall
 #sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
 #git clone --depth=1 https://github.com/kenzok8/small
