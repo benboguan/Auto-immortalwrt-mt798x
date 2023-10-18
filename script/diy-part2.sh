@@ -9,7 +9,7 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
-# 修改openwrt登陆地址,把下面的192.168.123.1修改成你想要的就可以了
+# 修改openwrt登陆地址,把下面的192.168.110.1修改成你想要的就可以了
 sed -i 's/192.168.1.1/192.168.110.1/g' package/base-files/files/bin/config_generate
 
 # 修改主机名字，把R30B1修改你喜欢的就行（不能纯数字或者使用中文）
@@ -42,7 +42,7 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 ###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
-#sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
+sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
 #git clone --depth=1 https://github.com/kenzok8/small
 
 # 01_leds
@@ -68,9 +68,9 @@ pushd package/community
 #git clone --depth=1 https://github.com/garypang13/luci-app-dnsfilter
 
 # Add luci-app-passwall
-#rm -rf feeds/luci/applications/luci-app-passwall
-#git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
-#git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
+rm -rf ./feeds/packages/lang/golang && svn co https://github.com/immortalwrt/packages/branches/master/lang/golang feeds/packages/lang/golang
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
 #git clone --depth=1 https://github.com/kenzok8/small
 
 # Add luci-app-vssr <M>
