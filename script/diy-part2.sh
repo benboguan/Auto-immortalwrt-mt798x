@@ -42,7 +42,9 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 ###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
-sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
+rm -rf ./feeds/packages/lang/golang
+rm -rf ./feeds/luci/applications/luci-app-passwall
+#sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
 #git clone --depth=1 https://github.com/kenzok8/small
 
 # 01_leds
@@ -68,7 +70,6 @@ pushd package/community
 #git clone --depth=1 https://github.com/garypang13/luci-app-dnsfilter
 
 # Add luci-app-passwall
-rm -rf ./feeds/packages/lang/golang && svn co https://github.com/immortalwrt/packages/branches/master/lang/golang feeds/packages/lang/golang
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
 #git clone --depth=1 https://github.com/kenzok8/small
@@ -128,7 +129,7 @@ git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 # default luci-theme-argon
 #rm -rf feeds/luci/themes/luci-theme-bootstrap
 #rm -rf feeds/luci/themes/luci-theme-argon
-git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
+#git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 
 # Add luci-theme-argon
 #cd lede/package/lean
