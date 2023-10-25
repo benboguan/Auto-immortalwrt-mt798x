@@ -118,8 +118,6 @@ git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 #rm -rf feeds/luci/themes/luci-theme-argon
 #git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 
-# Add luci-theme-argon
-#cd lede/package/lean
-#rm -rf luci-theme-argon
-#git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
+# Add luci-theme-alpha
+git clone --depth=1 https://github.com/derisamedia/luci-theme-alpha
 #git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
