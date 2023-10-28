@@ -23,7 +23,7 @@ on:
 
 env:
   REPO_URL: https://github.com/benboguan/bl-mt798x
-  REPO_BRANCH: clt-r30b1
+  REPO_BRANCH: R30B1-LED
   DIY_P_SH: hanwckf/clt-r30b1-FIP/diy-part.sh
   SSH_ACTIONS: false
   UPLOAD_FIRMWARE: true
