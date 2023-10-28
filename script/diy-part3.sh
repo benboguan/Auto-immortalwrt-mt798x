@@ -36,7 +36,7 @@ sed -i 's/ImmortalWrt/TXD/g' package/base-files/files/bin/config_generate
 sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
 
 #修正连接数
-sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
+#sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
 ###### 取消bootstrap为默认主题 ######
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
@@ -88,7 +88,7 @@ rm -rf ./feeds/luci/applications/luci-app-ttyd
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ttyd
 
 # luci-app-pptp-server
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 
 # luci-app-pptpd
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptpd
