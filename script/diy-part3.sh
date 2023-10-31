@@ -41,6 +41,8 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 ###### 取消bootstrap为默认主题 ######
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
+###### 替换iwinfo ######
+#rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
 
 # Clone community packages to package/community
 mkdir package/community
@@ -84,8 +86,8 @@ pushd package/community
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
 
 # Add luci-app-ttyd
-rm -rf ./feeds/luci/applications/luci-app-ttyd
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ttyd
+#rm -rf ./feeds/luci/applications/luci-app-ttyd
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ttyd
 
 # luci-app-pptp-server
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
@@ -100,7 +102,7 @@ svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ttyd
 #git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 
 # default luci-theme-argon
-rm -rf feeds/luci/themes/luci-theme-bootstrap
+#rm -rf feeds/luci/themes/luci-theme-bootstrap
 
 # Add luci-theme-argon
 #cd lede/package/lean
