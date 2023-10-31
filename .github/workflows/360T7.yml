@@ -8,7 +8,7 @@
 #修改以下代码或者开启触发开关都好，要严格按格式对好,前面有多少空格也要看清楚
 #代码里有 name: 后面的内容随便改,冒号后面是有个空格的,如果修改固件名字就要考虑能不能显示出你想要的
 
-name: txd-ax3000-hanwckf 闭源固件
+name: 360t7-hanwckf 闭源固件
 
 #permissions: write-all
 #开启写权限，防止无法上传到release
@@ -168,16 +168,16 @@ jobs:
       uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: txd-ax3000-immortalwrt-mt798x固件
+        name: 360t7-immortalwrt-mt798x固件
         path: ${{ env.FIRMWARE }}
 
     - name: 生成release标签
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && steps.compile.outputs.status == 'success' && !cancelled()
       run: |
-        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-txd-ax3000">> $GITHUB_OUTPUT
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-360t7">> $GITHUB_OUTPUT
         touch release.txt
-        echo "txd-ax3000" >> release.txt
+        echo "360t7" >> release.txt
         echo "📥 固件下载" >> release.txt
         echo "status=success" >>$GITHUB_OUTPUT
 
