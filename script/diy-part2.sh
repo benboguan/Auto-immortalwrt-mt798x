@@ -39,7 +39,7 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 #sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
 #修改默认登录密码
-#sed -i 's/root::0:0:99999:7:::/root:$1$3KE5ghiL$wO7ejWeQ8Hxj6osIgD.xi/:19661:0:99999:7:::/g' package/base-files/files/etc/shadow
+#sed -i 's|root::0:0:99999:7:::|root:$1$3KE5ghiL$wO7ejWeQ8Hxj6osIgD.xi/:19661:0:99999:7:::|g' package/base-files/files/etc/shadow
 
 ###### 取消bootstrap为默认主题 ######
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
