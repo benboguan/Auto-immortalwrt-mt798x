@@ -79,7 +79,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt21'
+        mixkey: 'openwrt211'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
