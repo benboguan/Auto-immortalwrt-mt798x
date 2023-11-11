@@ -82,7 +82,7 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        SOC=mt7981 BOARD=clt_r30b1 MULTI_LAYOUT=1 ./build.sh
+        SOC=mt7981 BOARD=clt_r30b1 360t7 MULTI_LAYOUT=1 ./build.sh
         echo "FILE_DATE=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
         
