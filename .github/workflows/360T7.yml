@@ -25,12 +25,12 @@ on:
 #    - cron: 0 16 * * *
 
 env:
-  REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x
-  REPO_BRANCH: openwrt-21.02
+  REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
+  REPO_BRANCH: clt-r30b1
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/360T7.config
   DIY_P1_SH: script/diy-part1.sh
-  DIY_P2_SH: script/diy-part3.sh
+  DIY_P2_SH: script/diy-part2.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: 可用磁盘空间 (Ubuntu)
+    - name: 可用磁盘空间清理 (Ubuntu)
       uses: jlumbroso/free-disk-space@main
       with:
         # this might remove tools that are actually needed,
@@ -58,10 +58,10 @@ jobs:
         large-packages: true
         swap-storage: true
         
-    - name: 检查
+    - name: 准备
       uses: actions/checkout@v3.1.0  
       
-    - name: 磁盘空间
+    - name: 检查磁盘空间
       run: |
            echo "Free space:"
            df -h
@@ -175,6 +175,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && steps.compile.outputs.status == 'success' && !cancelled()
       run: |
+        echo -e "✅ immortalwrt-mt798x 源码版本，256M运存建议时常重启一次，不然容易出现爆运存导致卡网" >> release.txt
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")-360t7">> $GITHUB_OUTPUT
         touch release.txt
         echo "360t7" >> release.txt
