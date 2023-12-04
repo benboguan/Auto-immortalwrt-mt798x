@@ -27,7 +27,7 @@ on:
   
 env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
-  REPO_BRANCH: clt-r30b1
+  REPO_BRANCH: luci-wifi
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/r30b1.config
   DIY_P1_SH: script/diy-part1.sh
@@ -124,7 +124,7 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        make download -j8 V=10
+        make download -j8 V=11
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
