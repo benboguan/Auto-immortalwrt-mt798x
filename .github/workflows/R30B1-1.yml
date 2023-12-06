@@ -26,7 +26,7 @@ on:
    #   分,时,日,月,星期。每周 三 20时执行一次 (UTC时间)
   
 env:
-  REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
+  REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x
   REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/r30b1-1.config
