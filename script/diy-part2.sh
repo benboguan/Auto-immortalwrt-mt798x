@@ -19,13 +19,15 @@ sed -i 's/ImmortalWrt/R30B1/g' package/base-files/files/bin/config_generate
 #sed -i 's/OpenWrt/R30B1_AX3000/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # 修改闭源驱动2G wifi名称
-sed -i 's/MT7981_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b0.dat
-sed -i 's/MT798x_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/applications/gl-sdk4-mtk-wifi-v2/files/wireless.config
+sed -i 's/ImmortalWrt-2.4G/R30B1_AX3000_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+#sed -i 's/MT7981_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b0.dat
+#sed -i 's/MT798x_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/applications/gl-sdk4-mtk-wifi-v2/files/wireless.config
 #sed -i 's/OpenWRT-2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/files/lib/wifi/mt_dbdc.sh
 
 # 修改闭源驱动5G wifi名称
-sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
-sed -i 's/MT798x_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/applications/gl-sdk4-mtk-wifi-v2/files/wireless.config
+sed -i 's/ImmortalWrt-5G/R30B1_AX3000_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+#sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
+#sed -i 's/MT798x_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/applications/gl-sdk4-mtk-wifi-v2/files/wireless.config
 #sed -i 's/OpenWRT-5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/files/lib/wifi/mt_dbdc.sh
 
 # 添加个性信息
@@ -44,7 +46,10 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 #sed -i 's|root::0:0:99999:7:::|root:$1$3KE5ghiL$wO7ejWeQ8Hxj6osIgD.xi/:19661:0:99999:7:::|g' package/base-files/files/etc/shadow
 
 ###### 取消bootstrap为默认主题 ######
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+sed -i 's/{ "type": "mac80211" }/true/g' feeds/luci/collections/luci/Makefile
+
+######
+sed -i 's/ImmortalWrt-5G/R30B1_AX3000_5G/g' package/mtk/applications/luci-app-mtwifi-cfg/root/usr/share/luci-app-mtwifi-cfg/luci-mod-status.json
 
 ###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
 #rm -rf ./feeds/packages/lang/golang && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/lang/golang feeds/packages/lang/golang
