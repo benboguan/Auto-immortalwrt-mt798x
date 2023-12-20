@@ -45,11 +45,11 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 #修改默认登录密码
 #sed -i 's|root::0:0:99999:7:::|root:$1$3KE5ghiL$wO7ejWeQ8Hxj6osIgD.xi/:19661:0:99999:7:::|g' package/base-files/files/etc/shadow
 
-###### 取消bootstrap为默认主题 ######
-sed -i 's/{ "type": "mac80211" }/true/g' feeds/luci/collections/luci/Makefile
-
 ######
-sed -i 's/ImmortalWrt-5G/R30B1_AX3000_5G/g' package/mtk/applications/luci-app-mtwifi-cfg/root/usr/share/luci-app-mtwifi-cfg/luci-mod-status.json
+#sed -i 's/ImmortalWrt-5G/R30B1_AX3000_5G/g' package/mtk/applications/luci-app-mtwifi-cfg/root/usr/share/luci-app-mtwifi-cfg/luci-mod-status.json
+
+###### 取消bootstrap为默认主题 ######
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 ###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
 #rm -rf ./feeds/packages/lang/golang && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/lang/golang feeds/packages/lang/golang
