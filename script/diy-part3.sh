@@ -44,6 +44,9 @@ sed -i 's|root::0:0:99999:7:::|root:$1$Z/1UnJkW$kLW1Rti51WxDH.jtDJKPI.:19661:0:9
 ###### 取消bootstrap为默认主题 ######
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
+###### 取消myddns_ipv4 ######
+sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
+
 ###### 替换iwinfo ######
 #rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
 
