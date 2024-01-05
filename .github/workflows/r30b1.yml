@@ -27,7 +27,7 @@ on:
   
 env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
-  REPO_BRANCH: luci-wifi
+  REPO_BRANCH: mtk-script
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/r30b1.config
   DIY_P1_SH: script/diy-part1.sh
