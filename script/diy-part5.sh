@@ -92,7 +92,7 @@ pushd package/community
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-iptvhelper
 
 # add luci-app-pptp-server
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptp-server
 
 # add luci-app-pptpd
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pptpd
