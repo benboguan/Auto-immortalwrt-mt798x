@@ -45,9 +45,6 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 ###### 取消bootstrap为默认主题 ######
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
-######
-#sed -i 's/ImmortalWrt-5G/R30B1_AX3000_5G/g' package/mtk/applications/luci-app-mtwifi-cfg/root/usr/share/luci-app-mtwifi-cfg/luci-mod-status.json
-
 ###### 替换iwinfo ######
 #rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
 
