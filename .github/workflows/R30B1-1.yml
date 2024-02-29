@@ -60,7 +60,7 @@ jobs:
         swap-storage: true
         
     - name: 准备
-      uses: actions/checkout@v3.1.0  
+      uses: actions/checkout@v4.1.0  
       
     - name: 检查磁盘空间
       run: |
