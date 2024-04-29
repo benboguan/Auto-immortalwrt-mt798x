@@ -29,7 +29,7 @@ sed -i 's/OpenWRT-2.4G/R30B1_2.4G/g' package/mtk/drivers/wifi-profile/files/comm
 sed -i 's/ImmortalWrt-5G/R30B1_AX3000_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
 #sed -i 's/MT798x_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/applications/gl-sdk4-mtk-wifi-v2/files/wireless.config
-sed -i 's/$hostname-5G/R30B1_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/files/lib/wifi/mtk.sh
+sed -i 's/$hostname-5G/R30B1_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
 sed -i 's/OpenWRT-5G/R30B1_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
 
 # 添加个性信息
