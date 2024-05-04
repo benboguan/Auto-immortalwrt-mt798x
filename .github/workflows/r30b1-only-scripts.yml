@@ -29,7 +29,7 @@ env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
   REPO_BRANCH: only-scripts
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: config/r30b1.config
+  CONFIG_FILE: config/r30b1-xiao.config
   DIY_P1_SH: script/diy-part1.sh
   DIY_P2_SH: script/diy-part2.sh
   SSH_ACTIONS: false
