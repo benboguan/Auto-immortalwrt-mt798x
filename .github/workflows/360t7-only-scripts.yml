@@ -8,7 +8,7 @@
 #修改以下代码或者开启触发开关都好，要严格按格式对好,前面有多少空格也要看清楚
 #代码里有 name: 后面的内容随便改,冒号后面是有个空格的,如果修改固件名字就要考虑能不能显示出你想要的
 
-name: clt-r30b1-only-scripts 闭源固件
+name: 360t7-only-scripts 闭源固件
 
 #permissions: write-all
 #开启写权限，防止无法上传到release
@@ -29,9 +29,9 @@ env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
   REPO_BRANCH: only-scripts
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: config/r30b1.config
+  CONFIG_FILE: config/360T7.config
   DIY_P1_SH: script/diy-part1.sh
-  DIY_P2_SH: script/diy-part2.sh
+  DIY_P2_SH: script/diy-part5.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
@@ -169,7 +169,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: r30b1-immortalwrt-mt798x固件
+        name: 360t7-immortalwrt-mt798x固件
         path: ${{ env.FIRMWARE }}
 
     - name: 生成release标签
@@ -177,9 +177,9 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         echo -e "✅ immortalwrt-mt798x 源码版本，256M运存建议时常重启一次，不然容易出现爆运存导致卡网" >> release.txt
-        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-clt-r30b1">> $GITHUB_OUTPUT
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-360t7">> $GITHUB_OUTPUT
         touch release.txt
-        echo "clt-r30b1-scripts" >> release.txt
+        echo "360t7-scripts" >> release.txt
         echo "📥 固件下载" >> release.txt
         echo "status=success" >>$GITHUB_OUTPUT
 
