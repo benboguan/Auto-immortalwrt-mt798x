@@ -19,16 +19,16 @@ sed -i 's/ImmortalWrt/360/g' package/base-files/files/bin/config_generate
 #sed -i 's/OpenWrt/R30B1_AX3000/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # 修改闭源驱动2G wifi名称
-sed -i 's/ImmortalWrt-2.4G/MSG1500_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+#sed -i 's/ImmortalWrt-2.4G/MSG1500_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b0.dat
-#sed -i 's/$hostname-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
-#sed -i 's/OpenWRT-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
+sed -i 's/$hostname-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
+sed -i 's/OpenWRT-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
 
 # 修改闭源驱动5G wifi名称
-sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+#sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
-#sed -i 's/$hostname-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
-#sed -i 's/OpenWRT-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
+sed -i 's/$hostname-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
+sed -i 's/OpenWRT-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
 
 # 添加个性信息
 #sed -i 's/R22.8.2/R22.8.2 by nanchuci/g' package/lean/default-settings/files/zzz-default-settings
