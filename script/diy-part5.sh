@@ -48,6 +48,12 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 ###### 替换iwinfo ######
 #rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
 
+# patch
+patch -p1 -i ../patches/107-strongswan-5_9_11-upgrade.patch
+patch -p1 -i ../patches/108-strongswan-add-uci-support.patch
+patch -p1 -i ../patches/150-ksmbd-sess-user-check.patch
+patch -p1 -i ../patches/151-ksmbd-multiple-vulnerabilities-fix.patch
+
 # Clone community packages to package/community
 mkdir package/community
 pushd package/community

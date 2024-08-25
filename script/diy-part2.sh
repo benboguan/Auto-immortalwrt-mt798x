@@ -68,14 +68,11 @@ sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
 #sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
 #git clone --depth=1 https://github.com/kenzok8/small
 
-# 01_leds
-#patch -p1 -i ../patches/01_leds.patch
-
-# mt7621.mk
-#patch -p1 -i ../patches/mt7621.mk.patch
-
-# set-irq-affinity
-#patch -p1 -i ../patches/set-irq-affinity.patch
+# patch
+patch -p1 -i ../patches/107-strongswan-5_9_11-upgrade.patch
+patch -p1 -i ../patches/108-strongswan-add-uci-support.patch
+patch -p1 -i ../patches/150-ksmbd-sess-user-check.patch
+patch -p1 -i ../patches/151-ksmbd-multiple-vulnerabilities-fix.patch
 
 # Clone community packages to package/community
 mkdir package/community
