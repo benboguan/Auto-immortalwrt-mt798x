@@ -62,6 +62,10 @@ git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
 ./scripts/feeds update -i
 #./scripts/feeds install -a && make menuconfig
+./scripts/feeds install -f -ap packages
+./scripts/feeds install -f -ap luci
+./scripts/feeds install -f -ap routing
+./scripts/feeds install -f -ap telephony
 
 ./scripts/feeds install -p feeds_app -f luci-app-alist luci-app-adguardhome luci-app-smartdns luci-app-mosdns
 
