@@ -49,34 +49,38 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 #rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
 
 ###### 删除原包 ######
+./scripts/feeds clean
+./scripts/feeds update -a
+
 #sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
 #./scripts/feeds update -a && rm -rf feeds/packages/net/{alist,adguardhome,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,v2raya,xray-core,xray-plugin,shadowsocksr-libev,shadowsocks-rust,trojan-go,trojan-plus,trojan}
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 rm -rf feeds/packages/net/chinadns-ng
-git clone https://github.com/kenzok8/small/trunk/chinadns-ng feeds/packages/net/chinadns-ng
 rm -rf feeds/packages/net/trojan-go
-git clone https://github.com/kenzok8/small/trunk/trojan-go feeds/packages/net/trojan-go
 rm -rf feeds/packages/net/trojan-plus
-git clone https://github.com/kenzok8/small/trunk/trojan-plus feeds/packages/net/trojan-plus
 rm -rf feeds/packages/net/trojan
-git clone https://github.com/kenzok8/small/trunk/trojan feeds/packages/net/trojan
 rm -rf feeds/packages/net/v2ray-core
-git clone https://github.com/kenzok8/small/trunk/v2ray-core feeds/packages/net/v2ray-core
 rm -rf feeds/packages/net/v2ray-geodata
-git clone https://github.com/kenzok8/small/trunk/v2ray-geodata feeds/packages/net/v2ray-geodata
 rm -rf feeds/packages/net/v2ray-plugin
-git clone https://github.com/kenzok8/small/trunk/v2ray-plugin feeds/packages/net/v2ray-plugin
 rm -rf feeds/packages/net/v2raya
-git clone https://github.com/kenzok8/small/trunk/v2raya feeds/packages/net/v2raya
 rm -rf feeds/packages/net/xray-core
-git clone https://github.com/kenzok8/small/trunk/xray-core feeds/packages/net/xray-core
 rm -rf feeds/packages/net/xray-plugin
-git clone https://github.com/kenzok8/small/trunk/xray-plugin feeds/packages/net/xray-plugin
+git clone https://github.com/xiaorouji/openwrt-passwall-packages feeds/packages/net
 rm -rf feeds/luci/applications/luci-app-passwall
-git clone https://github.com/kenzok8/small/trunk/luci-app-passwall feeds/luci/applications/luci-app-passwall
-rm -rf feeds/luci/applications/luci-app-ssr-plus
-git clone https://github.com/kenzok8/small/trunk/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
+git clone https://github.com/xiaorouji/openwrt-passwall feeds/luci/applications/luci-app-passwall
+#rm -rf feeds/luci/applications/luci-app-ssr-plus
+#git clone https://github.com/kenzok8/small/trunk/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
+
+./scripts/feeds update -i
+#./scripts/feeds install -f -ap packages
+#./scripts/feeds install -f -ap luci
+#./scripts/feeds install -f -ap routing
+#./scripts/feeds install -f -ap telephony
+
+#./scripts/feeds install -p small -f luci-app-adguardhome xray-core xray-plugin dns2tcp dns2socks haproxy \
+#luci-app-passwall luci-app-mosdns luci-app-smartdns luci-app-ddns-go luci-app-cloudflarespeedtest taskd \
+#luci-lib-xterm luci-lib-taskd luci-app-store quickstart luci-app-quickstart luci-app-istorex luci-theme-argon
 
 # Clone community packages to package/community
 mkdir package/community
