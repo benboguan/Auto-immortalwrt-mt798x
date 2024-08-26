@@ -56,19 +56,33 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 ###### 取消myddns_ipv4 ######
 sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
 
-###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
-#rm -rf ./feeds/packages/lang/golang && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/lang/golang feeds/packages/lang/golang
-#rm -rf ./feeds/packages/net/chinadns-ng && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/chinadns-ng feeds/packages/net/chinadns-ng
-#rm -rf ./feeds/packages/net/v2ray-core && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/v2ray-core feeds/packages/net/v2ray-core
-#rm -rf ./feeds/packages/net/v2ray-geodata && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/v2ray-geodata feeds/packages/net/v2ray-geodata
-#rm -rf ./feeds/packages/net/v2ray-plugin && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/v2ray-plugin feeds/packages/net/v2ray-plugin
-#rm -rf ./feeds/packages/net/v2raya && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/v2raya feeds/packages/net/v2raya
-#rm -rf ./feeds/packages/net/xray-core && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/xray-core feeds/packages/net/xray-core
-#rm -rf ./feeds/packages/net/xray-plugin && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/xray-plugin feeds/packages/net/xray-plugin
-#rm -rf ./feeds/luci/applications/luci-app-passwall && svn co https://github.com/immortalwrt/luci/branches/openwrt-23.05/applications/luci-app-passwall feeds/luci/applications/luci-app-passwall
-#rm -rf ./feeds/luci/applications/luci-app-passwall && svn co https://github.com/immortalwrt/luci/branches/openwrt-23.05/applications/luci-app-passwall feeds/luci/applications/luci-app-passwall
-#sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
-#git clone --depth=1 https://github.com/kenzok8/small
+###### 科学 ######
+sed -i '1i src-git feeds_app https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
+./scripts/feeds update -a && rm -rf feeds/luci/applications/{luci-app-alist,luci-app-adguardhome,luci-app-smartdns,luci-app-mosdns,luci-app-passwall,luci-app-ssr-plus,luci-app-vssr} && rm -rf feeds/packages/net/{alist,adguardhome,brook,hysteria,mosdns,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin,shadowsocks-rust,trojan-go,trojan-plus,trojan}
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+
+#rm -rf feeds/luci/applications/luci-app-passwall
+#git clone https://github.com/xiaorouji/openwrt-passwall feeds/luci/applications
+rm -rf feeds/small/luci-app-homeproxy
+
+./scripts/feeds install -p feeds_app -f adguardhome alist smartdns luci-app-alist luci-app-adguardhome luci-app-smartdns
+
+./scripts/feeds install -p small -f brook hysteria chinadns-ng mosdns v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin shadowsocks-rust trojan-go trojan-plus trojan dns2tcp dns2socks \
+luci-app-passwall luci-app-ssr-plus luci-app-mosdns
+
+./scripts/feeds install -a
+#make menuconfig
+
+###### 加载补丁文件 ######
+
+for packagepatch in $( ls feeds/packages/feeds-package-patch ); do
+    cd feeds/packages/
+    echo Applying feeds-package-patch $packagepatch
+    patch -p1 --no-backup-if-mismatch < feeds-package-patch/$packagepatch
+    cd ../..
+done
 
 # Clone community packages to package/community
 mkdir package/community
@@ -96,8 +110,8 @@ pushd package/community
 #git clone --depth=1 https://github.com/BoringCat/luci-app-mentohust
 #git clone --depth=1 https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk
 
-# Add lua-ipops
-#svn co https://github.com/x-wrt/com.x-wrt/trunk/lua-ipops
+# Add lucky
+#git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
 
 # Add luci-app-natflow-users
 #svn co https://github.com/x-wrt/com.x-wrt/trunk/luci-app-natflow-users

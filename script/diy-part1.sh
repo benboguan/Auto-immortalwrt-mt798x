@@ -23,23 +23,6 @@
 #echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main" >> "feeds.conf.default"
 #sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
-sed -i '1i src-git feeds_app https://github.com/kenzok8/openwrt-packages' feeds.conf.default
-sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
-./scripts/feeds update -a && rm -rf feeds/luci/applications/{luci-app-alist,luci-app-adguardhome,luci-app-smartdns,luci-app-mosdns,luci-app-passwall,luci-app-ssr-plus,luci-app-vssr} && rm -rf feeds/packages/net/{alist,adguardhome,brook,hysteria,mosdns,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin,shadowsocks-rust,trojan-go,trojan-plus,trojan}
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-
-#rm -rf feeds/luci/applications/luci-app-passwall
-#git clone https://github.com/xiaorouji/openwrt-passwall feeds/luci/applications
-rm -rf feeds/small/luci-app-homeproxy
-
-./scripts/feeds install -p feeds_app -f adguardhome alist smartdns luci-app-alist luci-app-adguardhome luci-app-smartdns
-
-./scripts/feeds install -p small -f brook hysteria chinadns-ng mosdns v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin shadowsocks-rust trojan-go trojan-plus trojan dns2tcp dns2socks \
-luci-app-passwall luci-app-ssr-plus luci-app-mosdns
-
-./scripts/feeds install -a
-make menuconfig
 
 # Add luci-theme-argon
 #cd lede/package/lean
