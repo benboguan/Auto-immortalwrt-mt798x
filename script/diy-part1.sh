@@ -37,7 +37,7 @@ git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
 #rm -rf feeds/luci/applications/luci-app-passwall
 #git clone https://github.com/xiaorouji/openwrt-passwall feeds/luci/applications
-\rm -rf ./feeds/small/luci-app-homeproxy
+#\rm -rf ./feeds/small/luci-app-homeproxy
 ./scripts/feeds install -a
 #make menuconfig
 
