@@ -48,24 +48,20 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 ###### 替换iwinfo ######
 #rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
 
-###### 删除原luci中的luci-app-passwall 下面rm -rf命令不起作用，另辟路径改变原包名称 ######
-rm -rf ./feeds/packages/lang/golang && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/lang/golang feeds/packages/lang/golang
-rm -rf ./feeds/packages/net/chinadns-ng && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/chinadns-ng feeds/packages/net/chinadns-ng
-rm -rf ./feeds/packages/net/v2ray-core && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/v2ray-core feeds/packages/net/v2ray-core
-rm -rf ./feeds/packages/net/v2ray-geodata && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/v2ray-geodata feeds/packages/net/v2ray-geodata
-rm -rf ./feeds/packages/net/v2ray-plugin && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/v2ray-plugin feeds/packages/net/v2ray-plugin
-rm -rf ./feeds/packages/net/v2raya && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/v2raya feeds/packages/net/v2raya
-rm -rf ./feeds/packages/net/xray-core && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/xray-core feeds/packages/net/xray-core
-rm -rf ./feeds/packages/net/xray-plugin && svn co https://github.com/immortalwrt/packages/branches/openwrt-23.05/net/xray-plugin feeds/packages/net/xray-plugin
-rm -rf ./feeds/luci/applications/luci-app-passwall && svn co https://github.com/immortalwrt/luci/branches/openwrt-23.05/applications/luci-app-passwall feeds/luci/applications/luci-app-passwall
-#sed -i 's/luci-app-passwall/luci-app-passwall-mod/g' feeds/luci/applications/luci-app-passwall/Makefile
-#git clone --depth=1 https://github.com/kenzok8/small
-
-# patch
-patch -p1 -i ./patches/107-strongswan-5_9_11-upgrade.patch
-patch -p1 -i ./patches/108-strongswan-add-uci-support.patch
-patch -p1 -i ./patches/150-ksmbd-sess-user-check.patch
-patch -p1 -i ./patches/151-ksmbd-multiple-vulnerabilities-fix.patch
+###### 删除原包 ######
+#rm -rf ./feeds/packages/lang/golang
+#rm -rf ./feeds/packages/net/chinadns-ng
+#rm -rf ./feeds/packages/net/v2ray-core
+#rm -rf ./feeds/packages/net/v2ray-geodata
+#rm -rf ./feeds/packages/net/v2ray-plugin
+#rm -rf ./feeds/packages/net/v2raya
+#rm -rf ./feeds/packages/net/xray-core
+#rm -rf ./feeds/packages/net/xray-plugin
+#rm -rf ./feeds/luci/applications/luci-app-passwall
+sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
+./scripts/feeds update -a && rm -rf feeds/luci/applications/{luci-app-passwall,luci-app-ssr-plus} && rm -rf feeds/packages/net/{alist,adguardhome,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,v2raya,xray-core,xray-plugin,shadowsocksr-libev,shadowsocks-rust}
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
 # Clone community packages to package/community
 mkdir package/community
