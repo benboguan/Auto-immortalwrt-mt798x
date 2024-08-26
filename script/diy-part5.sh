@@ -57,12 +57,12 @@ git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
 #rm -rf feeds/luci/applications/luci-app-passwall
 #git clone https://github.com/xiaorouji/openwrt-passwall feeds/luci/applications
-rm -rf feeds/small/luci-app-homeproxy
+#rm -rf feeds/small/luci-app-homeproxy
 
-./scripts/feeds install -p feeds_app -f adguardhome alist smartdns luci-app-alist luci-app-adguardhome luci-app-smartdns
+#./scripts/feeds install -p feeds_app -f adguardhome alist smartdns luci-app-alist luci-app-adguardhome luci-app-smartdns
 
-./scripts/feeds install -p small -f brook hysteria chinadns-ng mosdns v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin shadowsocks-rust trojan-go trojan-plus trojan dns2tcp dns2socks \
-luci-app-passwall luci-app-ssr-plus luci-app-mosdns
+#./scripts/feeds install -p small -f brook hysteria chinadns-ng mosdns v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin shadowsocks-rust trojan-go trojan-plus trojan dns2tcp dns2socks \
+#luci-app-passwall luci-app-ssr-plus luci-app-mosdns
 
 ./scripts/feeds install -a
 #make menuconfig
