@@ -64,7 +64,7 @@ rm -rf feeds/small/luci-app-homeproxy
 ./scripts/feeds install -p small -f brook hysteria chinadns-ng mosdns v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin shadowsocks-rust trojan-go trojan-plus trojan dns2tcp dns2socks \
 luci-app-passwall luci-app-ssr-plus luci-app-mosdns
 
-for packagepatch in $( ls feeds/packages/net/feeds-package-patch ); do
+for packagepatch in $( ls feeds/packages/feeds-package-patch ); do
     cd feeds/packages/
     echo Applying feeds-package-patch $packagepatch
     patch -p1 --no-backup-if-mismatch < feeds-package-patch/$packagepatch
@@ -72,6 +72,7 @@ for packagepatch in $( ls feeds/packages/net/feeds-package-patch ); do
 done
 
 ./scripts/feeds install -a
+make menuconfig
 #./scripts/feeds install -a && make menuconfig
 
 # Clone community packages to package/community
