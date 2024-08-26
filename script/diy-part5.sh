@@ -69,7 +69,7 @@ git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 ./scripts/feeds install -p feeds_app -f luci-app-alist luci-app-adguardhome luci-app-smartdns luci-app-mosdns
 
 ./scripts/feeds install -p small -f alist adguardhome brook hysteria smartdns chinadns-ng mosdns v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin shadowsocks-rust trojan-go trojan-plus trojan dns2tcp dns2socks \
-kmod-nft-tproxy luci-app-alist luci-app-smartdns luci-app-passwall luci-app-ssr-plus luci-app-mosdns
+luci-app-alist luci-app-smartdns luci-app-passwall luci-app-ssr-plus luci-app-mosdns
 
 for packagepatch in $( ls feeds/packages/feeds-package-patch ); do
     cd feeds/packages/
