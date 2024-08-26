@@ -1,6 +1,6 @@
-diff -Naur a/feeds/packages/kernel/ksmbd/patches/02-sess_user_check.patch b/feeds/packages/kernel/ksmbd/patches/02-sess_user_check.patch
---- a/feeds/packages/kernel/ksmbd/patches/02-sess_user_check.patch	1970-01-01 08:00:00.000000000 +0800
-+++ b/feeds/packages/kernel/ksmbd/patches/02-sess_user_check.patch	2023-01-05 19:52:08.668863747 +0800
+diff -Naur a/kernel/ksmbd/patches/02-sess_user_check.patch b/kernel/ksmbd/patches/02-sess_user_check.patch
+--- a/kernel/ksmbd/patches/02-sess_user_check.patch	1970-01-01 08:00:00.000000000 +0800
++++ b/kernel/ksmbd/patches/02-sess_user_check.patch	2023-01-05 19:52:08.668863747 +0800
 @@ -0,0 +1,13 @@
 +diff -Naur a/smb1pdu.c b/smb1pdu.c
 +--- a/smb1pdu.c	2023-01-05 19:46:23.861535362 +0800

@@ -1,5 +1,5 @@
---- a/feeds/packages/net/strongswan/Makefile
-+++ b/feeds/packages/net/strongswan/Makefile
+--- a/net/strongswan/Makefile
++++ b/net/strongswan/Makefile
 @@ -8,12 +8,12 @@
  include $(TOPDIR)/rules.mk
  
@@ -444,7 +444,7 @@
  $(eval $(call BuildPlugin,xauth-eap,EAP XAuth backend,))
  $(eval $(call BuildPlugin,xauth-generic,generic XAuth backend,))
 --- /dev/null
-+++ b/feeds/packages/net/strongswan/files/gencerts.sh
++++ b/net/strongswan/files/gencerts.sh
 @@ -0,0 +1,155 @@
 +#!/bin/sh
 +
@@ -601,8 +601,8 @@
 +done
 +
 +exit 0
---- a/feeds/packages/net/strongswan/files/ipsec.init
-+++ b/feeds/packages/net/strongswan/files/ipsec.init
+--- a/net/strongswan/files/ipsec.init
++++ b/net/strongswan/files/ipsec.init
 @@ -354,6 +354,8 @@ service_triggers() {
  start_service() {
  	prepare_env
@@ -612,8 +612,8 @@
  	[ $WAIT_FOR_INTF -eq 1 ] && return
  
  	procd_open_instance
---- a/feeds/packages/net/strongswan/files/swanctl.init
-+++ b/feeds/packages/net/strongswan/files/swanctl.init
+--- a/net/strongswan/files/swanctl.init
++++ b/net/strongswan/files/swanctl.init
 @@ -4,7 +4,7 @@ START=90
  STOP=10
  
@@ -1325,7 +1325,7 @@
  	procd_set_param file $SWANCTL_CONF_FILE
  	procd_append_param file /etc/swanctl/conf.d/*.conf
 --- /dev/null
-+++ b/feeds/packages/net/strongswan/patches/0900-src-Patch-for-building-with-musl-on-openwrt-taken-ve.patch
++++ b/net/strongswan/patches/0900-src-Patch-for-building-with-musl-on-openwrt-taken-ve.patch
 @@ -0,0 +1,110 @@
 +From 27a54379cf3c48ff63c02a4a9f023297bba60d45 Mon Sep 17 00:00:00 2001
 +From: Noel Kuntze <noel.kuntze@thermi.consulting>
@@ -1438,7 +1438,7 @@
 + #include <stdio.h>
 + #include <math.h>
 --- /dev/null
-+++ b/feeds/packages/net/strongswan/patches/0901-uci-verbatim-patch-from-openwrt-package-sources.patch
++++ b/net/strongswan/patches/0901-uci-verbatim-patch-from-openwrt-package-sources.patch
 @@ -0,0 +1,29 @@
 +From 81be4fa54760aa4fed53c6d93da443f57a66f262 Mon Sep 17 00:00:00 2001
 +From: Noel Kuntze <noel.kuntze@thermi.consulting>
@@ -1470,7 +1470,7 @@
 + 	}
 + 
 --- /dev/null
-+++ b/feeds/packages/net/strongswan/patches/0902-ipsec-Patch-ipsec-script-to-work-with-musl-sleep-.-P.patch
++++ b/net/strongswan/patches/0902-ipsec-Patch-ipsec-script-to-work-with-musl-sleep-.-P.patch
 @@ -0,0 +1,21 @@
 +From d71ec4f26a1334e78a38fa44a1271c52a029e3b4 Mon Sep 17 00:00:00 2001
 +From: Noel Kuntze <noel.kuntze@thermi.consulting>
@@ -1494,7 +1494,7 @@
 + 				then
 + 					sleep 1
 --- /dev/null
-+++ b/feeds/packages/net/strongswan/patches/0903-updown-Call-sbin-hotplug-call-ipsec-1-in-updown-scri.patch
++++ b/net/strongswan/patches/0903-updown-Call-sbin-hotplug-call-ipsec-1-in-updown-scri.patch
 @@ -0,0 +1,26 @@
 +From c779da992bdd440e336383da0eb75ef3a2ea6cde Mon Sep 17 00:00:00 2001
 +From: Noel Kuntze <noel.kuntze@thermi.consulting>
@@ -1523,7 +1523,7 @@
 + #              indicates  what  version of this interface is being
 + #              used.  This document describes version  1.1.   This
 --- /dev/null
-+++ b/feeds/packages/net/strongswan/patches/0904-gmpdh-Plugin-that-implements-gmp-DH-functions-in-an-.patch
++++ b/net/strongswan/patches/0904-gmpdh-Plugin-that-implements-gmp-DH-functions-in-an-.patch
 @@ -0,0 +1,239 @@
 +From 9f60c2ea6394facac55b90ef66466e1b9edef2a9 Mon Sep 17 00:00:00 2001
 +From: Noel Kuntze <noel.kuntze@thermi.consulting>
@@ -1765,7 +1765,7 @@
 ++
 ++#endif /** GMPDH_PLUGIN_H_ @}*/
 --- /dev/null
-+++ b/feeds/packages/net/strongswan/patches/0905-undef-wolfssl-RNG.patch
++++ b/net/strongswan/patches/0905-undef-wolfssl-RNG.patch
 @@ -0,0 +1,12 @@
 +--- a/src/libstrongswan/plugins/wolfssl/wolfssl_plugin.c
 ++++ b/src/libstrongswan/plugins/wolfssl/wolfssl_plugin.c
@@ -1779,7 +1779,7 @@
 + 
 + typedef struct private_wolfssl_plugin_t private_wolfssl_plugin_t;
 + 
---- a/feeds/packages/net/strongswan/patches/101-musl-fixes.patch
+--- a/net/strongswan/patches/101-musl-fixes.patch
 +++ /dev/null
 @@ -1,83 +0,0 @@
 ---- a/src/libstrongswan/library.h
@@ -1865,7 +1865,7 @@
 - #include <sys/socket.h>
 - #include <linux/netlink.h>
 - #include <linux/rtnetlink.h>
---- a/feeds/packages/net/strongswan/patches/203-uci.patch
+--- a/net/strongswan/patches/203-uci.patch
 +++ /dev/null
 @@ -1,20 +0,0 @@
 ---- a/src/libcharon/plugins/uci/uci_parser.c
@@ -1888,7 +1888,7 @@
 - 		}
 - 	}
 - 
---- a/feeds/packages/net/strongswan/patches/210-sleep.patch
+--- a/net/strongswan/patches/210-sleep.patch
 +++ /dev/null
 @@ -1,11 +0,0 @@
 ---- a/src/ipsec/_ipsec.in
@@ -1902,7 +1902,7 @@
 - 				if [ $? -ne 0 ]
 - 				then
 - 					sleep 1
---- a/feeds/packages/net/strongswan/patches/300-include-ipsec-hotplug.patch
+--- a/net/strongswan/patches/300-include-ipsec-hotplug.patch
 +++ /dev/null
 @@ -1,16 +0,0 @@
 ---- a/src/_updown/_updown.in
@@ -1921,7 +1921,7 @@
 - #      PLUTO_VERSION
 - #              indicates  what  version of this interface is being
 - #              used.  This document describes version  1.1.   This
---- a/feeds/packages/net/strongswan/patches/305-minimal_dh_plugin.patch
+--- a/net/strongswan/patches/305-minimal_dh_plugin.patch
 +++ /dev/null
 @@ -1,221 +0,0 @@
 ---- a/configure.ac
@@ -2145,7 +2145,7 @@
 -+};
 -+
 -+#endif /** GMPDH_PLUGIN_H_ @}*/
---- a/feeds/packages/net/strongswan/patches/700-strongswan-4.4.1-5.9.3_cert-cache-random.patch
+--- a/net/strongswan/patches/700-strongswan-4.4.1-5.9.3_cert-cache-random.patch
 +++ /dev/null
 @@ -1,30 +0,0 @@
 -From b667237b3a84f601ef5a707ce8eb861c3a5002d3 Mon Sep 17 00:00:00 2001
@@ -2178,7 +2178,7 @@
 - 		for (i = 0; i < CACHE_SIZE; i++)
 - 		{
 - 			rel = &this->relations[(i + offset) % CACHE_SIZE];
---- a/feeds/packages/net/strongswan/patches/710-strongswan-5.5.0-5.9.4_eap_success.patch
+--- a/net/strongswan/patches/710-strongswan-5.5.0-5.9.4_eap_success.patch
 +++ /dev/null
 @@ -1,138 +0,0 @@
 -From 76968cdd6b79f6ae40d674554e902ced192fd33e Mon Sep 17 00:00:00 2001
@@ -2319,7 +2319,7 @@
 - 				}
 - 				type = this->method->get_type(this->method, &vendor);
 - 				if (vendor)
---- a/feeds/packages/net/strongswan/patches/720-strongswan-5.6.1-5.9.3_gmp-rsa-ssa-salt-len.patch
+--- a/net/strongswan/patches/720-strongswan-5.6.1-5.9.3_gmp-rsa-ssa-salt-len.patch
 +++ /dev/null
 @@ -1,49 +0,0 @@
 -From 423a5d56274a1d343e0d2107dfc4fbf0df2dcca5 Mon Sep 17 00:00:00 2001
@@ -2371,7 +2371,7 @@
 - 	{
 - 		return FALSE;
 - 	}
---- a/feeds/packages/net/strongswan/patches/730-strongswan-5.1.0-5.9.7_cert_online_validate.patch
+--- a/net/strongswan/patches/730-strongswan-5.1.0-5.9.7_cert_online_validate.patch
 +++ /dev/null
 @@ -1,200 +0,0 @@
 -From 66d3b2e0e596a6eac1ebcd15c83a8d9368fe7b34 Mon Sep 17 00:00:00 2001

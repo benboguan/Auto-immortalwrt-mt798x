@@ -1,5 +1,5 @@
---- a/feeds/packages/net/strongswan/Makefile
-+++ b/feeds/packages/net/strongswan/Makefile
+--- a/net/strongswan/Makefile
++++ b/net/strongswan/Makefile
 @@ -259,6 +259,7 @@ $(call Package/strongswan/Default)
    TITLE+= (default)
    DEPENDS:= strongswan \
@@ -37,7 +37,7 @@
  
  define Package/strongswan-libnttfft/install
 --- /dev/null
-+++ b/feeds/packages/net/strongswan/files/ipsec.conf
++++ b/net/strongswan/files/ipsec.conf
 @@ -0,0 +1,38 @@
 +config 'ipsec'
 +
@@ -77,8 +77,8 @@
 +	option 'encryption_algorithm' 'aes128'
 +	option 'hash_algorithm' 'sha1'
 +	option 'dh_group' 'modp768'
---- a/feeds/packages/net/strongswan/files/swanctl.init
-+++ b/feeds/packages/net/strongswan/files/swanctl.init
+--- a/net/strongswan/files/swanctl.init
++++ b/net/strongswan/files/swanctl.init
 @@ -241,6 +241,7 @@ config_child() {
  	local if_id
  	local rekeytime

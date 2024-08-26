@@ -1,6 +1,6 @@
-diff -Naur a/feeds/packages/kernel/ksmbd/patches/03-multiple_vulnerabilities_fix.patch b/feeds/packages/kernel/ksmbd/patches/03-multiple_vulnerabilities_fix.patch
---- a/feeds/packages/kernel/ksmbd/patches/03-multiple_vulnerabilities_fix.patch	1970-01-01 08:00:00.000000000 +0800
-+++ b/feeds/packages/kernel/ksmbd/patches/03-multiple_vulnerabilities_fix.patch	2023-01-17 17:31:25.943136641 +0800
+diff -Naur a/kernel/ksmbd/patches/03-multiple_vulnerabilities_fix.patch b/kernel/ksmbd/patches/03-multiple_vulnerabilities_fix.patch
+--- a/kernel/ksmbd/patches/03-multiple_vulnerabilities_fix.patch	1970-01-01 08:00:00.000000000 +0800
++++ b/kernel/ksmbd/patches/03-multiple_vulnerabilities_fix.patch	2023-01-17 17:31:25.943136641 +0800
 @@ -0,0 +1,430 @@
 +diff -Naur a/smb2misc.c b/smb2misc.c
 +--- a/smb2misc.c	2023-01-17 10:34:34.291983249 +0800
