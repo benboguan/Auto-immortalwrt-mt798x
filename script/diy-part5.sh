@@ -58,8 +58,9 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 #rm -rf ./feeds/packages/net/xray-core
 #rm -rf ./feeds/packages/net/xray-plugin
 #rm -rf ./feeds/luci/applications/luci-app-passwall
+rm -rf feeds/luci/applications/{luci-app-passwall,luci-app-ssr-plus}
 sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
-./scripts/feeds update -a && rm -rf feeds/luci/applications/{luci-app-passwall,luci-app-ssr-plus} && rm -rf feeds/packages/net/{alist,adguardhome,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,v2raya,xray-core,xray-plugin,shadowsocksr-libev,shadowsocks-rust}
+./scripts/feeds update -a && rm -rf feeds/packages/net/{alist,adguardhome,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,v2raya,xray-core,xray-plugin,shadowsocksr-libev,shadowsocks-rust,trojan-go,trojan-plus,trojan}
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
