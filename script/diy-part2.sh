@@ -70,9 +70,6 @@ git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 #./scripts/feeds install -p small -f brook hysteria chinadns-ng mosdns v2ray-core v2ray-geodata v2ray-plugin xray-core xray-plugin shadowsocks-rust trojan-go trojan-plus trojan dns2tcp dns2socks \
 #luci-app-passwall luci-app-ssr-plus luci-app-mosdns
 
-./scripts/feeds install -a
-#make menuconfig
-
 ###### 加载补丁文件 ######
 for packagepatch in $( ls feeds/packages/feeds-package-patch ); do
     cd feeds/packages/
@@ -166,3 +163,6 @@ git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 # Add luci-theme-alpha
 #git clone --depth=1 https://github.com/derisamedia/luci-theme-alpha
 #git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
+
+./scripts/feeds install -a
+#make menuconfig

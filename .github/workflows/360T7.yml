@@ -112,7 +112,7 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-        [ -d patches/feeds-luci-patch ] && mv -f patches/feeds-luci-patch ./feeds/small/feeds-luci-patch
+        [ -d patches/feeds-luci-patch ] && mv -f patches/feeds-luci-patch openwrt/feeds/small/feeds-luci-patch
 
     - name: SSH远程连接服务器配置固件
       uses: P3TERX/ssh2actions@v1.0.0
