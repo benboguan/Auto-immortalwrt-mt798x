@@ -21,7 +21,7 @@
  define Package/$(PKG_NAME)/config
 -select PACKAGE_luci-lib-ipkg if PACKAGE_$(PKG_NAME)
 -
-choice
+ choice
 -	prompt "Uclient SSL Lib Selection"
 -	default PACKAGE_$(PKG_NAME)_INCLUDE_libustream-openssl
 -	
