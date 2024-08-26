@@ -54,29 +54,29 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 rm -rf feeds/packages/net/chinadns-ng
-svn co https://github.com/kenzok8/small/trunk/chinadns-ng feeds/packages/net/chinadns-ng
+git clone https://github.com/kenzok8/small/trunk/chinadns-ng feeds/packages/net/chinadns-ng
 rm -rf feeds/packages/net/trojan-go
-svn co https://github.com/kenzok8/small/trunk/trojan-go feeds/packages/net/trojan-go
+git clone https://github.com/kenzok8/small/trunk/trojan-go feeds/packages/net/trojan-go
 rm -rf feeds/packages/net/trojan-plus
-svn co https://github.com/kenzok8/small/trunk/trojan-plus feeds/packages/net/trojan-plus
+git clone https://github.com/kenzok8/small/trunk/trojan-plus feeds/packages/net/trojan-plus
 rm -rf feeds/packages/net/trojan
-svn co https://github.com/kenzok8/small/trunk/trojan feeds/packages/net/trojan
+git clone https://github.com/kenzok8/small/trunk/trojan feeds/packages/net/trojan
 rm -rf feeds/packages/net/v2ray-core
-svn co https://github.com/kenzok8/small/trunk/v2ray-core feeds/packages/net/v2ray-core
+git clone https://github.com/kenzok8/small/trunk/v2ray-core feeds/packages/net/v2ray-core
 rm -rf feeds/packages/net/v2ray-geodata
-svn co https://github.com/kenzok8/small/trunk/v2ray-geodata feeds/packages/net/v2ray-geodata
+git clone https://github.com/kenzok8/small/trunk/v2ray-geodata feeds/packages/net/v2ray-geodata
 rm -rf feeds/packages/net/v2ray-plugin
-svn co https://github.com/kenzok8/small/trunk/v2ray-plugin feeds/packages/net/v2ray-plugin
+git clone https://github.com/kenzok8/small/trunk/v2ray-plugin feeds/packages/net/v2ray-plugin
 rm -rf feeds/packages/net/v2raya
-svn co https://github.com/kenzok8/small/trunk/v2raya feeds/packages/net/v2raya
+git clone https://github.com/kenzok8/small/trunk/v2raya feeds/packages/net/v2raya
 rm -rf feeds/packages/net/xray-core
-svn co https://github.com/kenzok8/small/trunk/xray-core feeds/packages/net/xray-core
+git clone https://github.com/kenzok8/small/trunk/xray-core feeds/packages/net/xray-core
 rm -rf feeds/packages/net/xray-plugin
-svn co https://github.com/kenzok8/small/trunk/xray-plugin feeds/packages/net/xray-plugin
+git clone https://github.com/kenzok8/small/trunk/xray-plugin feeds/packages/net/xray-plugin
 rm -rf feeds/luci/applications/luci-app-passwall
-svn co https://github.com/kenzok8/small/trunk/luci-app-passwall feeds/luci/applications/luci-app-passwall
+git clone https://github.com/kenzok8/small/trunk/luci-app-passwall feeds/luci/applications/luci-app-passwall
 rm -rf feeds/luci/applications/luci-app-ssr-plus
-svn co https://github.com/kenzok8/small/trunk/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
+git clone https://github.com/kenzok8/small/trunk/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
 
 # Clone community packages to package/community
 mkdir package/community
@@ -104,8 +104,8 @@ pushd package/community
 #git clone --depth=1 https://github.com/BoringCat/luci-app-mentohust
 #git clone --depth=1 https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk
 
-# Add lua-ipops
-#svn co https://github.com/x-wrt/com.x-wrt/trunk/lua-ipops
+# Add lucky
+git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
 
 # Add luci-app-natflow-users
 #svn co https://github.com/x-wrt/com.x-wrt/trunk/luci-app-natflow-users
