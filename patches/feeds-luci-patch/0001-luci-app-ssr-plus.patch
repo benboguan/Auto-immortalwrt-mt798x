@@ -15,7 +15,7 @@
  	+PACKAGE_$(PKG_NAME)_INCLUDE_V2ray:curl \
  	+PACKAGE_$(PKG_NAME)_INCLUDE_V2ray:v2ray-core \
  	+PACKAGE_$(PKG_NAME)_INCLUDE_Xray:curl \
-@@ -65,23 +63,6 @@ LUCI_DEPENDS:= \
+@@ -65,23 +63,7 @@ LUCI_DEPENDS:= \
  
  
  define Package/$(PKG_NAME)/config
