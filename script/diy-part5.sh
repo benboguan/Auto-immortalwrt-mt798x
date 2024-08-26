@@ -51,8 +51,8 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 ###### 删除原包 ######
 #sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
 #./scripts/feeds update -a && rm -rf feeds/packages/net/{alist,adguardhome,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,v2raya,xray-core,xray-plugin,shadowsocksr-libev,shadowsocks-rust,trojan-go,trojan-plus,trojan}
-#rm -rf feeds/packages/lang/golang
-#git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 rm -rf feeds/packages/net/chinadns-ng
 svn co https://github.com/kenzok8/small/trunk/chinadns-ng feeds/packages/net/chinadns-ng
 rm -rf feeds/packages/net/trojan-go
