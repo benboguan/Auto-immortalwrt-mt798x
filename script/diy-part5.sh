@@ -62,10 +62,10 @@ rm -rf ./feeds/luci/applications/luci-app-passwall && svn co https://github.com/
 #git clone --depth=1 https://github.com/kenzok8/small
 
 # patch
-patch -p1 -i ../patches/107-strongswan-5_9_11-upgrade.patch
-patch -p1 -i ../patches/108-strongswan-add-uci-support.patch
-patch -p1 -i ../patches/150-ksmbd-sess-user-check.patch
-patch -p1 -i ../patches/151-ksmbd-multiple-vulnerabilities-fix.patch
+patch -p1 -i ./patches/107-strongswan-5_9_11-upgrade.patch
+patch -p1 -i ./patches/108-strongswan-add-uci-support.patch
+patch -p1 -i ./patches/150-ksmbd-sess-user-check.patch
+patch -p1 -i ./patches/151-ksmbd-multiple-vulnerabilities-fix.patch
 
 # Clone community packages to package/community
 mkdir package/community
