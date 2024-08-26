@@ -57,7 +57,7 @@ git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
 #rm -rf feeds/luci/applications/luci-app-passwall
 #git clone https://github.com/xiaorouji/openwrt-passwall feeds/luci/applications
-#rm -rf feeds/luci/applications/luci-app-ssr-plus
+rm -rf feeds/small/luci-app-homeproxy
 
 #./scripts/feeds install -a && make menuconfig
 
@@ -67,14 +67,14 @@ git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 luci-app-passwall luci-app-ssr-plus luci-app-mosdns
 
 for packagepatch in $( ls feeds/packages/net/feeds-package-patch ); do
-    cd feeds/packages/
+    cd feeds/packages/net/
     echo Applying feeds-package-patch $packagepatch
     patch -p1 --no-backup-if-mismatch < feeds-package-patch/$packagepatch
     cd ../..
 done
 
 for packagepatch in $( ls feeds/packages/kernel/feeds-package-patch ); do
-    cd feeds/packages/
+    cd feeds/packages/kernel/
     echo Applying feeds-package-patch $packagepatch
     patch -p1 --no-backup-if-mismatch < feeds-package-patch/$packagepatch
     cd ../..
