@@ -49,20 +49,34 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 #rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
 
 ###### 删除原包 ######
-#rm -rf ./feeds/packages/lang/golang
-#rm -rf ./feeds/packages/net/chinadns-ng
-#rm -rf ./feeds/packages/net/v2ray-core
-#rm -rf ./feeds/packages/net/v2ray-geodata
-#rm -rf ./feeds/packages/net/v2ray-plugin
-#rm -rf ./feeds/packages/net/v2raya
-#rm -rf ./feeds/packages/net/xray-core
-#rm -rf ./feeds/packages/net/xray-plugin
-#rm -rf ./feeds/luci/applications/luci-app-passwall
-rm -rf feeds/luci/applications/{luci-app-passwall,luci-app-ssr-plus}
-sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
-./scripts/feeds update -a && rm -rf feeds/packages/net/{alist,adguardhome,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,v2raya,xray-core,xray-plugin,shadowsocksr-libev,shadowsocks-rust,trojan-go,trojan-plus,trojan}
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+#sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
+#./scripts/feeds update -a && rm -rf feeds/packages/net/{alist,adguardhome,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,v2raya,xray-core,xray-plugin,shadowsocksr-libev,shadowsocks-rust,trojan-go,trojan-plus,trojan}
+#rm -rf feeds/packages/lang/golang
+#git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+rm -rf feeds/packages/net/chinadns-ng
+svn co https://github.com/kenzok8/small/trunk/chinadns-ng feeds/packages/net/chinadns-ng
+rm -rf feeds/packages/net/trojan-go
+svn co https://github.com/kenzok8/small/trunk/trojan-go feeds/packages/net/trojan-go
+rm -rf feeds/packages/net/trojan-plus
+svn co https://github.com/kenzok8/small/trunk/trojan-plus feeds/packages/net/trojan-plus
+rm -rf feeds/packages/net/trojan
+svn co https://github.com/kenzok8/small/trunk/trojan feeds/packages/net/trojan
+rm -rf feeds/packages/net/v2ray-core
+svn co https://github.com/kenzok8/small/trunk/v2ray-core feeds/packages/net/v2ray-core
+rm -rf feeds/packages/net/v2ray-geodata
+svn co https://github.com/kenzok8/small/trunk/v2ray-geodata feeds/packages/net/v2ray-geodata
+rm -rf feeds/packages/net/v2ray-plugin
+svn co https://github.com/kenzok8/small/trunk/v2ray-plugin feeds/packages/net/v2ray-plugin
+rm -rf feeds/packages/net/v2raya
+svn co https://github.com/kenzok8/small/trunk/v2raya feeds/packages/net/v2raya
+rm -rf feeds/packages/net/xray-core
+svn co https://github.com/kenzok8/small/trunk/xray-core feeds/packages/net/xray-core
+rm -rf feeds/packages/net/xray-plugin
+svn co https://github.com/kenzok8/small/trunk/xray-plugin feeds/packages/net/xray-plugin
+rm -rf feeds/luci/applications/luci-app-passwall
+svn co https://github.com/kenzok8/small/trunk/luci-app-passwall feeds/luci/applications/luci-app-passwall
+rm -rf feeds/luci/applications/luci-app-ssr-plus
+svn co https://github.com/kenzok8/small/trunk/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
 
 # Clone community packages to package/community
 mkdir package/community
