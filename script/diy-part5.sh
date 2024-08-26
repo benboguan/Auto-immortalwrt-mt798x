@@ -51,7 +51,7 @@ sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
 ###### 科学 ######
 sed -i '1i src-git feeds_app https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
-./scripts/feeds update -a && rm -rf feeds/luci/applications/{luci-app-alist,luci-app-adguardhome,luci-app-ipsec-vpnd,luci-app-smartdns,luci-app-mosdns,luci-app-passwall,luci-app-vssr} && rm -rf feeds/packages/net/{alist,adguardhome,brook,hysteria,mosdns,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin,shadowsocks-rust,trojan-go,trojan-plus,trojan}
+./scripts/feeds update -a && rm -rf feeds/luci/applications/{luci-app-alist,luci-app-adguardhome,luci-app-ipsec-vpnd,luci-app-ipsec-vpnserver-manyusers,luci-app-smartdns,luci-app-mosdns,luci-app-passwall,luci-app-vssr} && rm -rf feeds/packages/net/{alist,adguardhome,brook,hysteria,mosdns,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin,shadowsocks-rust,trojan-go,trojan-plus,trojan}
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
@@ -68,11 +68,17 @@ rm -rf feeds/small/luci-app-homeproxy
 #make menuconfig
 
 ###### 加载补丁文件 ######
-
 for packagepatch in $( ls feeds/packages/feeds-package-patch ); do
     cd feeds/packages/
     echo Applying feeds-package-patch $packagepatch
     patch -p1 --no-backup-if-mismatch < feeds-package-patch/$packagepatch
+    cd ../..
+done
+
+for lucipatch in $( ls feeds/small/feeds-luci-patch ); do
+    cd feeds/small/
+    echo Applying feeds-luci-patch $lucipatch
+    patch -p1 --no-backup-if-mismatch < feeds-luci-patch/$lucipatch
     cd ../..
 done
 
