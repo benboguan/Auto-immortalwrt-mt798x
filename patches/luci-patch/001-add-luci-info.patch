@@ -2,20 +2,12 @@ diff --git a/modules/luci-base/po/zh_Hans/base.po b/modules/luci-base/po/zh_Hans
 index 87436e05c6..dd54ced8fa 100644
 --- a/modules/luci-base/po/zh_Hans/base.po
 +++ b/modules/luci-base/po/zh_Hans/base.po
-@@ -8784,6 +8784,9 @@
- msgid "Enable 256-QAM"
- msgstr "启用 256-QAM"
- 
-+msgid "Source Code"
-+msgstr "开源代码"
-+
- msgid "802.11n 2.4Ghz Only"
- msgstr "只适合 802.11n 2.4Ghz"
- 
-@@ -8754,6 +8757,22 @@
+@@ -8754,6 +8757,24 @@
  msgid "« Back"
  msgstr "« 后退"
  
++msgid "Source Code"
++msgstr "开源代码"
 +
 +msgid "Custom Redirect Domain"
 +msgstr "自定义挟持域名"
