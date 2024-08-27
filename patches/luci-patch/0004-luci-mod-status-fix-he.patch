@@ -1,6 +1,25 @@
 --- a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
 +++ b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
-@@ -163,6 +163,8 @@ return view.extend({
+@@ -98,8 +98,7 @@ return view.extend({
+ 	},
+ 
+ 	create_channel_graph: function(chan_analysis, freq_tbl, freq) {
+-		var is5GHz = freq == '5GHz',
+-		    columns = is5GHz ? freq_tbl.length * 4 : freq_tbl.length + 3,
++		var columns = (freq != '2.4GHz') ? freq_tbl.length * 4 : freq_tbl.length + 3,
+ 		    chan_graph = chan_analysis.graph,
+ 		    G = chan_graph.firstElementChild,
+ 		    step = (chan_graph.offsetWidth - 2) / columns,
+@@ -135,7 +134,7 @@ return view.extend({
+ 			createGraphText(G,curr_offset+step, channel);
+ 			curr_offset += step;
+ 
+-			if (is5GHz && freq_tbl[i+1]) {
++			if ((freq != '2.4GHz') && freq_tbl[i+1]) {
+ 				var next_channel = freq_tbl[i+1];
+ 				/* Check if we are transitioning to another 5Ghz band range */
+ 				if ((next_channel - channel) == 4) {
+@@ -163,6 +162,8 @@ return view.extend({
  
  		chan_analysis.tab.addEventListener('cbi-tab-active', L.bind(function(ev) {
  			this.active_tab = ev.detail.tab;
@@ -9,7 +28,7 @@
  		}, this));
  	},
  
-@@ -198,7 +200,7 @@
+@@ -198,7 +199,7 @@
  
  			if (chan_analysis.offset_tbl[local_wifi.channel] != null && local_wifi.center_chan1) {
  				var center_channels = [local_wifi.center_chan1],
@@ -18,7 +37,16 @@
  				    chan_width = parseInt(chan_width_text)/10;
  
  				if (local_wifi.center_chan2) {
-@@ -306,6 +308,11 @@
+@@ -273,7 +274,7 @@
+ 						}
+ 					}
+ 
+-				if (res.vht_operation != null) {
++				if (res.vht_operation != null && res.vht_operation.channel_width > 40) {
+ 					center_channels[0] = res.vht_operation.center_freq_1;
+ 					if (res.vht_operation.channel_width == 80) {
+ 						chan_width = 8;
+@@ -306,6 +307,11 @@
  			}
  
  			cbi_update_table(table, rows);
@@ -30,7 +58,7 @@
  		}, this))
  	},
  
-@@ -347,7 +354,16 @@ render: function(data) {
+@@ -347,17 +353,29 @@ render: function(data) {
  		var svg = data[0],
  		    wifiDevs = data[1];
  
@@ -48,7 +76,21 @@
  
  		for (var ifname in wifiDevs) {
  			var freq_tbl = {
-@@ -392,25 +408,25 @@
+ 				['2.4GHz'] : [],
+ 				['5GHz'] : [],
++				['6GHz'] : [],
+ 			};
+ 
+ 			/* Split FrequencyList in Bands */
+ 			wifiDevs[ifname].freq.forEach(function(freq) {
++				if (freq.mhz >= 5925 && freq.mhz <= 7125) {
++					freq_tbl['6GHz'].push(freq.channel);
+-				if (freq.mhz >= 5000) {
++				} else if (freq.mhz >= 5160 && freq.mhz <= 5885) {
+ 					freq_tbl['5GHz'].push(freq.channel);
+ 				} else {
+ 					freq_tbl['2.4GHz'].push(freq.channel);
+@@ -392,25 +410,25 @@
  					dev: wifiDevs[ifname].dev,
  					graph: graph_data,
  					table: table,

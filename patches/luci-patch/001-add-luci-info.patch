@@ -1,14 +1,20 @@
-diff --git a/modules/luci-base/po/zh_Hans/base.po b/modules/luci-base/po/zh_Hans/base.po
-index 87436e05c6..dd54ced8fa 100644
 --- a/modules/luci-base/po/zh_Hans/base.po
 +++ b/modules/luci-base/po/zh_Hans/base.po
-@@ -8754,6 +8757,24 @@
+@@ -5725,6 +5725,10 @@
+ msgid "References"
+ msgstr "引用"
+ 
++#: modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js:363
++msgid "Refresh Channels"
++msgstr "刷新频道"
++
+ #: modules/luci-base/htdocs/luci-static/resources/luci.js:2719
+ msgid "Refreshing"
+ msgstr "刷新"
+@@ -8754,6 +8758,21 @@
  msgid "« Back"
  msgstr "« 后退"
  
-+msgid "Source Code"
-+msgstr "开源代码"
-+
 +msgid "Custom Redirect Domain"
 +msgstr "自定义挟持域名"
 +
@@ -27,37 +33,3 @@ index 87436e05c6..dd54ced8fa 100644
  msgid "Enables The 802.11k standard provides information to discover the best available access point"
  msgstr "启用 802.11k 自动寻找发现最佳可用接入点的信息"
  
-diff --git a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
-index 45f7b4acae..08fbde85c5 100644
---- a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
-+++ b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
-@@ -78,6 +78,21 @@ return baseclass.extend({
- 			);
- 		}
- 
-+		var projectlink = document.createElement('a');
-+		projectlink.append('Project OpenWrt');
-+		projectlink.href = 'https://github.com/nanchuci';
-+		projectlink.target = '_blank';
-+
-+		var corelink = document.createElement('a');
-+		corelink.append('Powered By nanchuci');
-+		corelink.href = 'https://github.com/benboguan/Auto-immortalwrt-mt798x';
-+		corelink.target = '_blank';
-+
-+		var sourcelink = document.createElement('placeholder');
-+		sourcelink.append(projectlink);
-+		sourcelink.append(' / ');
-+		sourcelink.append(corelink);
-+
- 		var fields = [
- 			_('Hostname'),         boardinfo.hostname,
- 			_('Model'),            boardinfo.model + cpubench.cpubench,
-@@ -93,6 +108,7 @@ return baseclass.extend({
- 				systeminfo.load[2] / 65535.0
- 			) : null,
- 			_('CPU usage (%)'),    cpuusage.cpuusage
-+			_('Source Code'),      sourcelink
- 		];
- 
- 		if (tempinfo.tempinfo) {
