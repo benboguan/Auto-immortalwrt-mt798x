@@ -1,9 +1,14 @@
 --- a/modules/luci-base/po/zh_Hans/base.po
 +++ b/modules/luci-base/po/zh_Hans/base.po
-@@ -5725,6 +5725,10 @@
+@@ -5725,6 +5725,15 @@
  msgid "References"
  msgstr "引用"
  
++#: modules/luci-mod-status/htdocs/luci-static/resources/view/status/bandwidth.js:314
++#: modules/luci-mod-status/root/usr/share/luci/menu.d/luci-mod-status.json:115
++msgid "Bandwidth"
++msgstr "带宽"
++
 +#: modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js:363
 +msgid "Refresh Channels"
 +msgstr "刷新频道"
@@ -11,7 +16,7 @@
  #: modules/luci-base/htdocs/luci-static/resources/luci.js:2719
  msgid "Refreshing"
  msgstr "刷新"
-@@ -8754,6 +8758,21 @@
+@@ -8754,6 +8763,25 @@
  msgid "« Back"
  msgstr "« 后退"
  
@@ -29,6 +34,10 @@
 +
 +msgid "Comments"
 +msgstr "备注"
++
++msgid ""
++"This page displays the bandwidth used for all available physical interfaces."
++msgstr "此页面显示所有可用物理接口的带宽使用情况。"
 +
  msgid "Enables The 802.11k standard provides information to discover the best available access point"
  msgstr "启用 802.11k 自动寻找发现最佳可用接入点的信息"

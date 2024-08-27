@@ -1,3 +1,83 @@
+--- a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/bandwidth.js
++++ b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/bandwidth.js
+@@ -247,17 +247,17 @@ render: function(data) {
+ 		var svg = data[0],
+ 		    devs = data[1];
+ 
+-		var v = E('div', {}, E('div'));
++		var v = E('div', { 'class': 'cbi-map', 'id': 'map' }, E('div'));
+ 
+ 		for (var i = 0; i < devs.length; i++) {
+ 			var ifname = devs[i].getName();
+ 
+ 			if (!ifname)
+ 				continue;
+ 
+ 			var csvg = svg.cloneNode(true);
+ 
+-			v.firstElementChild.appendChild(E('div', { 'data-tab': ifname, 'data-tab-title': ifname }, [
++			v.firstElementChild.appendChild(E('div', { 'class': 'cbi-section', 'data-tab': ifname, 'data-tab-title': ifname }, [
+ 				csvg,
+ 				E('div', { 'class': 'right' }, E('small', { 'id': 'scale' }, '-')),
+ 				E('br'),
+@@ -283,7 +283,8 @@ render: function(data) {
+ 						E('td', { 'class': 'td right top' }, E('strong', {}, [ _('Peak:') ])),
+ 						E('td', { 'class': 'td', 'id': 'tx_bw_peak' }, rate(0, true))
+ 					])
+-				])
++				]),
++				E('div', {'class': 'cbi-section-create'})
+ 			]));
+ 
+ 			this.updateGraph(ifname, csvg, [ { line: 'rx', counter: true }, null, { line: 'tx', counter: true } ], function(svg, info) {
+@@ -309,7 +310,11 @@ render: function(data) {
+ 
+ 		this.pollData();
+ 
+-		return v;
++		return  E([], [
++			E('h2', _('Bandwidth')),
++			E('div', {'class': 'cbi-map-descr'}, _('This page displays the bandwidth used for all available physical interfaces.')),
++			v
++		]);
+ 	},
+ 
+ 	handleSaveApply: null,
+--- a/modules/luci-mod-status/root/usr/share/luci/menu.d/luci-mod-status.json
++++ b/modules/luci-mod-status/root/usr/share/luci/menu.d/luci-mod-status.json
+@@ -112,7 +112,7 @@ "admin/status/realtime/bandwidth": {
+ 	},
+ 
+ 	"admin/status/realtime/bandwidth": {
+-		"title": "Traffic",
++		"title": "Bandwidth",
+ 		"order": 2,
+ 		"action": {
+ 			"type": "view",
+--- a/modules/luci-mod-status/htdocs/luci-static/resources/svg/channel_analysis.svg
++++ b/modules/luci-mod-status/htdocs/luci-static/resources/svg/channel_analysis.svg
+@@ -16,4 +16,21 @@ return view.extend({
+ 
+ 	<line x1="0" y1="90%" x2="100%" y2="90%" style="stroke:black;stroke-width:0.1" />
+ 	<text id="label_10" x="10" y="89%" style="fill:#eee; font-size:9pt; font-family:sans-serif; text-shadow:1px 1px 1px #000">-90 dbm</text>
++	<defs>
++		<linearGradient id="GradientVerticalCenteredBlack">
++			<stop class="stopinvis" offset="0%" />
++			<stop class="stopblack" offset="50%" />
++			<stop class="stopinvis" offset="100%" />
++		</linearGradient>
++	</defs>
++	<style>
++		.stopinvis {
++			stop-color: "transparent";
++			stop-opacity: 0;
++		}
++		.stopblack {
++			stop-color: "black";
++			stop-opacity: .1;
++		}
++	</style>
+ </svg>
 --- a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
 +++ b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
 @@ -98,8 +98,7 @@ return view.extend({
