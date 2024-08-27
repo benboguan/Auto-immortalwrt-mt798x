@@ -1,0 +1,81 @@
+--- a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
++++ b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
+@@ -163,6 +163,8 @@ return view.extend({
+ 
+ 		chan_analysis.tab.addEventListener('cbi-tab-active', L.bind(function(ev) {
+ 			this.active_tab = ev.detail.tab;
++			if (!this.radios[this.active_tab].loadedOnce)
++				poll.start();
+ 		}, this));
+ 	},
+ 
+@@ -198,7 +200,7 @@
+ 
+ 			if (chan_analysis.offset_tbl[local_wifi.channel] != null && local_wifi.center_chan1) {
+ 				var center_channels = [local_wifi.center_chan1],
+-				    chan_width_text = local_wifi.htmode.replace(/(V)*HT/,''),
++				    chan_width_text = local_wifi.htmode.replace(/(V)*H[TE]/,''), /* Handle HT VHT HE */
+ 				    chan_width = parseInt(chan_width_text)/10;
+ 
+ 				if (local_wifi.center_chan2) {
+@@ -306,6 +308,11 @@
+ 			}
+ 
+ 			cbi_update_table(table, rows);
++
++			if (!radio.loadedOnce) {
++				radio.loadedOnce = true;
++				poll.stop();
++			}
+ 		}, this))
+ 	},
+ 
+@@ -347,7 +354,16 @@ render: function(data) {
+ 		var svg = data[0],
+ 		    wifiDevs = data[1];
+ 
++		var h2 = E('div', {'class' : 'cbi-title-section'}, [
++			E('h2', {'class': 'cbi-title-field'}, [ _('Channel Analysis') ]),
++			E('div', {'class': 'cbi-title-buttons'  }, [
++				E('button', {
++					'class': 'cbi-button cbi-button-edit',
++					'click': ui.createHandlerFn(this, 'handleScanRefresh')
++				}, [ _('Refresh Channels') ])])
++			]);
++
+-		var v = E('div', {}, E('div'));
++		var tabs = E('div', {}, E('div'));
+ 
+ 		for (var ifname in wifiDevs) {
+ 			var freq_tbl = {
+@@ -392,25 +408,25 @@
+ 					dev: wifiDevs[ifname].dev,
+ 					graph: graph_data,
+ 					table: table,
+-					scanCache: {}
++					scanCache: {},
++					loadedOnce: false,
+ 				};
+ 
+ 				cbi_update_table(table, [], E('em', { class: 'spinning' }, _('Starting wireless scan...')));
+ 
+-				v.firstElementChild.appendChild(tab)
++				tabs.firstElementChild.appendChild(tab)
+ 
+ 				requestAnimationFrame(L.bind(this.create_channel_graph, this, graph_data, freq_tbl[freq], freq));
+ 			}
+ 		}
+ 
+-		ui.tabs.initTabGroup(v.firstElementChild.childNodes);
++		ui.tabs.initTabGroup(tabs.firstElementChild.childNodes);
+ 
+ 		this.pollFn = L.bind(this.handleScanRefresh, this);
+ 
+ 		poll.add(this.pollFn);
+-		poll.start();
+ 
+-		return v;
++		return E('div', {}, [h2, tabs]);
+ 	},
+ 
+ 	handleSaveApply: null,

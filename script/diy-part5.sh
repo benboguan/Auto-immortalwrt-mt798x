@@ -70,10 +70,17 @@ for packagepatch in $( ls feeds/packages/feeds-package-patch ); do
     cd ../..
 done
 
-for lucipatch in $( ls feeds/small/feeds-luci-patch ); do
+for smallpatch in $( ls feeds/small/feeds-luci-patch ); do
     cd feeds/small/
-    echo Applying feeds-luci-patch $lucipatch
-    patch -p1 --no-backup-if-mismatch < feeds-luci-patch/$lucipatch
+    echo Applying feeds-luci-patch $smallpatch
+    patch -p1 --no-backup-if-mismatch < feeds-luci-patch/$smallpatch
+    cd ../..
+done
+
+for lucipatch in $( ls feeds/luci/luci-patch ); do
+    cd feeds/luci/
+    echo Applying luci-patch $lucipatch
+    patch -p1 --no-backup-if-mismatch < luci-patch/$lucipatch
     cd ../..
 done
 

@@ -1,0 +1,44 @@
+From 8de6bb01766582426e2ec0060426c5db7dfbbc90 Mon Sep 17 00:00:00 2001
+From: lunatickochiya <125438787@qq.com>
+Date: Tue, 19 Dec 2023 14:50:37 +0800
+Subject: [PATCH 3/3] luci-mod-network:add dhcp wifi options for 23.05
+
+---
+ .../htdocs/luci-static/resources/view/network/dhcp.js       | 4 ++++
+ .../htdocs/luci-static/resources/view/network/wireless.js   | 6 ++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js b/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
+index c723a45..555bcdf 100644
+--- a/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
++++ b/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
+@@ -252,7 +252,26 @@ return view.extend({
+ 		s.tab('tftp', _('TFTP Settings'));
+ 		s.tab('advanced', _('Advanced Settings'));
+ 		s.tab('leases', _('Static Leases'));
++		s.tab('custom_domain', _('Custom Redirect Domain'));
+ 
++		o = s.taboption('custom_domain', form.SectionValue, 'domain', form.GridSection, 'domain', null,
++			_('Define a custom domain name and the corresponding PTR record'));
++
++		ss = o.subsection;
++		ss.addremove = true;
++		ss.anonymous = true;
++
++		so = ss.option(form.Value, 'name', _('Domain Name'));
++		so.datatype = 'hostname';
++		so.rmempty  = true;
++
++		so = ss.option(form.Value, 'ip', _('<abbr title=\"Internet Protocol Version 4\">IPv4</abbr>-Address'));
++		so.datatype = 'or(ip4addr,"ignore")';
++		so.rmempty  = true;
++
++		so = ss.option(form.Value, 'comments', _('Comments'));
++		so.rmempty  = true;
++
+ 		s.taboption('general', form.Flag, 'domainneeded',
+ 			_('Domain required'),
+ 			_('Don\'t forward <abbr title="Domain Name System">DNS</abbr>-Requests without <abbr title="Domain Name System">DNS</abbr>-Name'));
+-- 
+2.34.1
+
