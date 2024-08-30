@@ -1,11 +1,11 @@
 --- a/modules/luci-base/htdocs/luci-static/resources/network.js
 +++ b/modules/luci-base/htdocs/luci-static/resources/network.js
-@@ -3891,9 +3891,14 @@ return view.extend({
+@@ -3891,8 +3891,14 @@ return view.extend({
  		case 'Master':  return _('Master');
  		case 'Client':  return _('Client');
  		case 'Ad-Hoc':  return _('Ad-Hoc');
 -		case 'Mash':    return _('Mesh');
-		case 'Mesh':    return _('Mesh');
++		case 'Mesh':    return _('Mesh');
  		case 'Monitor': return _('Monitor');
 +		case 'Master(VLAN)': return _('Master (VLAN)');
 +		case 'WDS':          return _('WDS');
