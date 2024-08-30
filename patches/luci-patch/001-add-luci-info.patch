@@ -16,10 +16,13 @@
  #: modules/luci-base/htdocs/luci-static/resources/luci.js:2719
  msgid "Refreshing"
  msgstr "刷新"
-@@ -8754,6 +8763,25 @@
+@@ -8754,6 +8763,28 @@
  msgid "« Back"
  msgstr "« 后退"
  
++msgid "P2P Client"
++msgstr "P2P 客户端"
++
 +msgid "Custom Redirect Domain"
 +msgstr "自定义挟持域名"
 +
