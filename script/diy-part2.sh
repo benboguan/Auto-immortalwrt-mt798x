@@ -92,6 +92,13 @@ for lucipatch in $( ls feeds/luci/luci-patch ); do
     cd ../..
 done
 
+for apppatch in $( ls feeds/feeds_app/feeds-app-patch ); do
+    cd feeds/feeds_app/
+    echo Applying feeds-app-patch $apppatch
+    patch -p1 --no-backup-if-mismatch < feeds-app-patch/$apppatch
+    cd ../..
+done
+
 # Clone community packages to package/community
 mkdir package/community
 pushd package/community
