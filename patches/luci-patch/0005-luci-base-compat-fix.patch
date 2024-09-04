@@ -28,20 +28,23 @@
  	];
  
  	var htmodes = {
-@@ -44,6 +45,12 @@ var htmodes = {
+@@ -44,7 +44,15 @@ var htmodes = {
+ 			'VHT20', '20 MHz', htmodes.VHT20,
  			'VHT40', '40 MHz', htmodes.VHT40,
  			'VHT80', '80 MHz', htmodes.VHT80,
++			'VHT80_80', '80+80 MHz', htmodes.VHT80_80,
  			'VHT160', '160 MHz', htmodes.VHT160
 +		],
 +		'ax': [
 +			'HE20', '20 MHz', htmodes.HE20,
 +			'HE40', '40 MHz', htmodes.HE40,
 +			'HE80', '80 MHz', htmodes.HE80,
++			'HE80_80', '80+80 MHz', htmodes.HE80_80,
 +			'HE160', '160 MHz', htmodes.HE160
  		]
  	};
  
-@@ -59,6 +66,10 @@ var bands = {
+@@ -59,6 +69,10 @@ var bands = {
  		],
  		'ac': [
  			'11a', '5 GHz', true
@@ -52,14 +55,14 @@
  		]
  	};
  
-@@ -129,7 +140,9 @@ function cbi_init_wifi(id
+@@ -129,7 +143,9 @@ function cbi_init_wifi(id
  
  		cbi_set_values(mode, modes);
  
-+		if (/HE20|HE40|HE80|HE160/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
++		if (/HE20|HE40|HE80|HE80_80|HE160/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
 +			mode.value = 'ax';
 -		if (/VHT20|VHT40|VHT80|VHT160/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
-+		else if (/VHT20|VHT40|VHT80|VHT160/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
++		else if (/VHT20|VHT40|VHT80|VHT80_80|VHT160/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
  			mode.value = 'ac';
  		else if (/HT20|HT40/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
  			mode.value = 'n';
