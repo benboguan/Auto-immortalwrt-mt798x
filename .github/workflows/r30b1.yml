@@ -110,7 +110,7 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         [ -d patches/feeds-package-patch ] && mv -f patches/feeds-package-patch openwrt/feeds/packages/feeds-package-patch
         [ -d patches/feeds-luci-patch ] && mv -f patches/feeds-luci-patch openwrt/feeds/small/feeds-luci-patch
-        [ -d patches/feeds-app-patch ] && mv -f patches/feeds-app-patch openwrt/feeds/feeds_app/feeds-app-patch
+#        [ -d patches/feeds-app-patch ] && mv -f patches/feeds-app-patch openwrt/feeds/feeds_app/feeds-app-patch
         [ -d patches/luci-patch ] && mv -f patches/luci-patch openwrt/feeds/luci/luci-patch
         chmod +x $DIY_P2_SH
         cd openwrt
