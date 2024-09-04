@@ -1,0 +1,65 @@
+--- a/modules/luci-base/htdocs/luci-static/resources/network.js
++++ b/modules/luci-base/htdocs/luci-static/resources/network.js
+@@ -3891,8 +3891,14 @@ return view.extend({
+ 		case 'Master':  return _('Master');
+ 		case 'Client':  return _('Client');
+ 		case 'Ad-Hoc':  return _('Ad-Hoc');
+-		case 'Mash':    return _('Mesh');
++		case 'Mesh':    return _('Mesh');
+ 		case 'Monitor': return _('Monitor');
++		case 'Master(VLAN)': return _('Master (VLAN)');
++		case 'WDS':          return _('WDS');
++		case 'Mesh Point':   return _('Mesh Point');
++		case 'P2P Client':   return _('P2P Client');
++		case 'P2P Go':       return _('P2P Go');
++		case 'Unknown':      return _('Unknown');
+ 		default:        return mode;
+ 		}
+ 	},
+--- a/modules/luci-compat/luasrc/view/cbi/wireless_modefreq.htm
++++ b/modules/luci-compat/luasrc/view/cbi/wireless_modefreq.htm
+@@ -29,7 +29,8 @@ var modes = [
+ 	var modes = [
+ 		'', 'Legacy', true,
+ 		'n', 'N', hwmodes.n,
+-		'ac', 'AC', hwmodes.ac
++		'ac', 'AC', hwmodes.ac,
++		'ax', 'AX', hwmodes.ax
+ 	];
+ 
+ 	var htmodes = {
+@@ -44,6 +45,12 @@ var htmodes = {
+ 			'VHT40', '40 MHz', htmodes.VHT40,
+ 			'VHT80', '80 MHz', htmodes.VHT80,
+ 			'VHT160', '160 MHz', htmodes.VHT160
++		],
++		'ax': [
++			'HE20', '20 MHz', htmodes.HE20,
++			'HE40', '40 MHz', htmodes.HE40,
++			'HE80', '80 MHz', htmodes.HE80,
++			'HE160', '160 MHz', htmodes.HE160
+ 		]
+ 	};
+ 
+@@ -59,6 +66,10 @@ var bands = {
+ 		],
+ 		'ac': [
+ 			'11a', '5 GHz', true
++		],
++		'ax': [
++			'11g', '2.4 GHz', (channels['11g'].length > 3),
++			'11a', '5 GHz', (channels['11a'].length > 3)
+ 		]
+ 	};
+ 
+@@ -129,7 +140,9 @@ function cbi_init_wifi(id
+ 
+ 		cbi_set_values(mode, modes);
+ 
++		if (/HE20|HE40|HE80|HE160/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
++			mode.value = 'ax';
+-		if (/VHT20|VHT40|VHT80|VHT160/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
++		else if (/VHT20|VHT40|VHT80|VHT160/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
+ 			mode.value = 'ac';
+ 		else if (/HT20|HT40/.test(<%= luci.http.write_json(self.map:get(section, "htmode")) %>))
+ 			mode.value = 'n';
