@@ -21,14 +21,14 @@ sed -i 's/ImmortalWrt/360/g' package/base-files/files/bin/config_generate
 # 修改闭源驱动2G wifi名称
 #sed -i 's/ImmortalWrt-2.4G/MSG1500_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b0.dat
-sed -i 's/$hostname-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
-sed -i 's/OpenWRT-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
+sed -i 's/$hostname-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+sed -i 's/OpenWRT-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
 
 # 修改闭源驱动5G wifi名称
 #sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
-sed -i 's/$hostname-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
-sed -i 's/OpenWRT-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt7981/lib/wifi/mtk.sh
+sed -i 's/$hostname-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+sed -i 's/OpenWRT-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
 
 # 添加个性信息
 #sed -i 's/R22.8.2/R22.8.2 by nanchuci/g' package/lean/default-settings/files/zzz-default-settings
@@ -40,13 +40,42 @@ sed -i 's/OpenWRT-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common
 sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
 
 #修正连接数
-#sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
+#sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf
 
 ###### 取消bootstrap为默认主题 ######
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 ###### 替换iwinfo ######
 #rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
+
+###### 加载补丁文件 ######
+for packagepatch in $( ls feeds/packages/feeds-package-patch ); do
+    cd feeds/packages/
+    echo Applying feeds-package-patch $packagepatch
+    patch -p1 --no-backup-if-mismatch < feeds-package-patch/$packagepatch
+    cd ../..
+done
+
+for smallpatch in $( ls feeds/small/feeds-luci-patch ); do
+    cd feeds/small/
+    echo Applying feeds-luci-patch $smallpatch
+    patch -p1 --no-backup-if-mismatch < feeds-luci-patch/$smallpatch
+    cd ../..
+done
+
+for lucipatch in $( ls feeds/luci/luci-patch ); do
+    cd feeds/luci/
+    echo Applying luci-patch $lucipatch
+    patch -p1 --no-backup-if-mismatch < luci-patch/$lucipatch
+    cd ../..
+done
+
+#for apppatch in $( ls feeds/feeds_app/feeds-app-patch ); do
+#    cd feeds/feeds_app/
+#    echo Applying feeds-app-patch $apppatch
+#    patch -p1 --no-backup-if-mismatch < feeds-app-patch/$apppatch
+#    cd ../..
+#done
 
 # Clone community packages to package/community
 mkdir package/community
@@ -74,8 +103,8 @@ pushd package/community
 #git clone --depth=1 https://github.com/BoringCat/luci-app-mentohust
 #git clone --depth=1 https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk
 
-# Add lua-ipops
-#svn co https://github.com/x-wrt/com.x-wrt/trunk/lua-ipops
+# Add lucky
+#git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
 
 # Add luci-app-natflow-users
 #svn co https://github.com/x-wrt/com.x-wrt/trunk/luci-app-natflow-users
