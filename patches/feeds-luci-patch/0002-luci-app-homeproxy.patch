@@ -5,6 +5,6 @@
  	+sing-box \
  	+chinadns-ng \
 -	+firewall4 \
- 	+kmod-nft-tproxy
+ 	+kmod-nft-tproxy \
+ 	+unzip
  
- PKG_NAME:=luci-app-homeproxy
