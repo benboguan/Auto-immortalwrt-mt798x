@@ -1,0 +1,101 @@
+name: 云编译 UBOOT
+run-name: Uboot - ${{ inputs.board }} (${{ inputs.soc }})
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      soc:
+        required: true
+        description: SOC/CPU Model
+        type: choice
+        default: 'mt7981'
+        options:
+          - 'mt7981'
+          - 'mt7986'
+          - 'mt7988'
+      board:
+        required: true
+        description: Router Model Name
+        type: string
+        default: sfp-nand-7981rxxx
+      multi-layout:
+        required: true
+        description: Enable Multiple Flash Layout Support
+        type: choice
+        default: '1'
+        options:
+          - '0'
+          - '1'
+      runs-on:
+        required: true
+        description: Runs on...
+        type: choice
+        default: ubuntu-latest
+        options:
+          - ubuntu-22.04
+          - ubuntu-24.04
+          - ubuntu-latest
+
+env:
+  REPO_URL: https://github.com/benboguan/bl-mt798x
+  REPO_BRANCH: R128
+  DIY_P_SH:
+  UPLOAD_FIRMWARE: true
+  TZ: Asia/Shanghai
+
+jobs:
+  ubuntu-build:
+    name: Build on ${{ inputs.runs-on }}
+    runs-on: ${{ inputs.runs-on }}
+    steps:
+      - name: 检查项目分支
+        uses: actions/checkout@main
+      - name: 初始化编译环境
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt update
+          sudo apt install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev device-tree-compiler
+          ##------Build Prepare------
+          sudo apt install gcc-aarch64-linux-gnu
+          export CROSS_COMPILE=aarch64-linux-gnu-
+          ##-------------------------
+          sudo apt autoremove --purge
+          sudo apt clean
+          sudo timedatectl set-timezone "$TZ"
+          sudo mkdir -p /workdir
+          sudo chown $USER:$GROUPS /workdir
+      - name: 下载uboot源码
+        working-directory: /workdir
+        run: |
+          df -hT $PWD
+          git clone $REPO_URL -b $REPO_BRANCH openwrt
+          ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+      - name: 编译uboot
+        id: compile
+        run: |
+          cd openwrt
+          echo -e "$(nproc) thread compile"
+          ./build.sh
+          echo "FILE_DATE=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_ENV
+          echo "status=success" >> $GITHUB_OUTPUT
+        env:
+          SOC: ${{ inputs.soc }}
+          BOARD: ${{ inputs.board }}
+          MULTI_LAYOUT: ${{ inputs.multi-layout }}
+      - name: 查看磁盘使用情况
+        if: (!cancelled())
+        run: df -hT
+      - name: 整理文件
+        id: organize
+        if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+        run: | 
+          cd openwrt/output
+          echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+          echo "status=success" >> $GITHUB_OUTPUT
+      - name: 上传uboot到Artifacts
+        uses: actions/upload-artifact@main
+        with:
+          name: Uboot - ${{ inputs.board }} (${{ inputs.soc }})
+          path: ${{ env.FIRMWARE }}
