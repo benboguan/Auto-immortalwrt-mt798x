@@ -87,6 +87,9 @@ done
 #    cd ../..
 #done
 
+# fix sx-7981r128
+#patch -p1 -i ../patches/9921-support-SX-7981R128-for-mtk-sdk-v7.6.6.1.patch
+
 # Clone community packages to package/community
 mkdir package/community
 pushd package/community
