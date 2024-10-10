@@ -111,7 +111,7 @@ jobs:
           echo "📥 uboot下载" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
       - name: 发布至release
-        uses: softprops/action-gh-release@main
+        uses: softprops/action-gh-release@master
         if: steps.tag.outputs.status == 'success' && !cancelled()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
