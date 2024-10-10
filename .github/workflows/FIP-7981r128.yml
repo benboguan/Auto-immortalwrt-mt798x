@@ -42,6 +42,7 @@ env:
   REPO_BRANCH: R128
   DIY_P_SH:
   UPLOAD_FIRMWARE: true
+  UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
 jobs:
@@ -96,6 +97,26 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
       - name: 上传uboot到Artifacts
         uses: actions/upload-artifact@main
+        if: steps.organize.outputs.status == 'success' && !cancelled()
         with:
           name: Uboot - ${{ inputs.board }} (${{ inputs.soc }})
           path: ${{ env.FIRMWARE }}
+      - name: 生成release标签
+        id: tag
+        if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+        run: |
+          echo "release_tag=Uboot - ${{ inputs.board }} (${{ inputs.soc }})" >> $GITHUB_OUTPUT
+          touch release.txt
+          echo "7981r128/7981r125-uboot" >> release.txt
+          echo "📥 uboot下载" >> release.txt
+          echo "status=success" >> $GITHUB_OUTPUT
+      - name: 发布至release
+        uses: softprops/action-gh-release@main
+        if: steps.tag.outputs.status == 'success' && !cancelled()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: ${{ env.FIRMWARE }}/*
+          name: Uboot - ${{ inputs.board }} (${{ inputs.soc }})
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          body_path: release.txt
