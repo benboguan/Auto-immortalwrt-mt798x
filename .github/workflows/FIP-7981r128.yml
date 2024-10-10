@@ -50,8 +50,25 @@ jobs:
     name: Build on ${{ inputs.runs-on }}
     runs-on: ${{ inputs.runs-on }}
     steps:
+      - name: 可用磁盘空间清理 (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          # this might remove tools that are actually needed,
+          # if set to "true" but frees about 6 GB
+          tool-cache: true
+          # all of these default to true, but feel free to set to
+          # "false" if necessary for your workflow
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
       - name: 检查项目分支
         uses: actions/checkout@main
+      - name: 检查磁盘空间
+        run: |
+             echo "Free space:"
+             df -h
       - name: 初始化编译环境
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -120,3 +137,18 @@ jobs:
           name: Uboot-${{ inputs.board }}-${{ inputs.soc }}
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
+      - name: 删除旧发布的固件
+        uses: dev-drprasad/delete-older-releases@master
+        if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
+        with:
+          keep_latest: 3
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 删除过时工作流程
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 1
+          keep_minimum_runs: 3
