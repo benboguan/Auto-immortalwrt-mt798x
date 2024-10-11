@@ -39,7 +39,7 @@ on:
 
 env:
   REPO_URL: https://github.com/benboguan/bl-mt798x
-  REPO_BRANCH: R128
+  REPO_BRANCH: test
   DIY_P_SH:
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
