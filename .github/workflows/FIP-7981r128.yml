@@ -33,6 +33,7 @@ on:
         type: choice
         default: ubuntu-latest
         options:
+          - ubuntu-20.04
           - ubuntu-22.04
           - ubuntu-24.04
           - ubuntu-latest
@@ -67,12 +68,13 @@ jobs:
         uses: actions/checkout@main
       - name: 检查磁盘空间
         run: |
-             echo "Free space:"
-             df -h
+          echo "Free space:"
+          df -h
       - name: 初始化编译环境
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
+          git clone https://github.com/PowerShell/PowerShell.git
           sudo -E apt-get update
           sudo -E apt-get -y install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev device-tree-compiler
           ##------Build Prepare------
