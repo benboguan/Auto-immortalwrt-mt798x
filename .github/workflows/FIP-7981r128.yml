@@ -77,10 +77,6 @@ jobs:
           git clone https://github.com/PowerShell/PowerShell.git
           sudo -E apt-get update
           sudo -E apt-get -y install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev device-tree-compiler
-          ##------Build Prepare------
-          sudo apt install gcc-aarch64-linux-gnu
-          export CROSS_COMPILE=aarch64-linux-gnu-
-          ##-------------------------
           sudo -E apt-get -y autoremove
           sudo -E apt-get autoclean
           sudo timedatectl set-timezone "$TZ"
@@ -134,10 +130,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ${{ env.FIRMWARE }}/*
           name: Uboot-${{ inputs.board }}-${{ inputs.soc }}
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
+          files: ${{ env.FIRMWARE }}/*
       - name: 删除旧发布的固件
         uses: dev-drprasad/delete-older-releases@master
         if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
