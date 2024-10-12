@@ -73,21 +73,20 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          sudo apt update
-          sudo apt install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev device-tree-compiler
+          sudo -E apt-get update
+          sudo -E apt-get -y install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev device-tree-compiler
           ##------Build Prepare------
           sudo apt install gcc-aarch64-linux-gnu
           export CROSS_COMPILE=aarch64-linux-gnu-
           ##-------------------------
-          sudo apt autoremove --purge
-          sudo apt clean
+          sudo -E apt-get -y autoremove
+          sudo -E apt-get autoclean
           sudo timedatectl set-timezone "$TZ"
           sudo mkdir -p /workdir
           sudo chown $USER:$GROUPS /workdir
       - name: 下载uboot源码
         working-directory: /workdir
         run: |
-          df -hT $PWD
           git clone $REPO_URL -b $REPO_BRANCH openwrt
           ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
       - name: 编译uboot
