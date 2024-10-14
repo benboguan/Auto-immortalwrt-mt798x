@@ -101,7 +101,7 @@ jobs:
         id: tag
         if: env.UPLOAD_RELEASE == 'true' && !cancelled()
         run: |
-          echo "release_tag=Uboot-${{ inputs.board }}-${{ inputs.soc }}" >> $GITHUB_OUTPUT
+          echo "release_tag=Uboot-${{ inputs.board }}-${{ env.FILE_DATE }}" >> $GITHUB_OUTPUT
           touch release.txt
           echo "${{ inputs.board }}-uboot" >> release.txt
           echo "📥 uboot下载" >> release.txt
