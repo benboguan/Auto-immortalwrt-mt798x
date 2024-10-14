@@ -51,30 +51,12 @@ jobs:
     name: Build on ${{ inputs.runs-on }}
     runs-on: ${{ inputs.runs-on }}
     steps:
-      - name: 可用磁盘空间清理 (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: true
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          swap-storage: true
       - name: 检查项目分支
         uses: actions/checkout@main
-      - name: 检查磁盘空间
-        run: |
-          echo "Free space:"
-          df -h
       - name: 初始化编译环境
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          git clone https://github.com/PowerShell/PowerShell.git
           sudo -E apt-get update
           sudo -E apt-get -y install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev device-tree-compiler
           sudo -E apt-get -y autoremove
@@ -121,7 +103,7 @@ jobs:
         run: |
           echo "release_tag=Uboot-${{ inputs.board }}-${{ inputs.soc }}" >> $GITHUB_OUTPUT
           touch release.txt
-          echo "7981r128/7981r125-uboot" >> release.txt
+          echo "${{ inputs.board }}-uboot" >> release.txt
           echo "📥 uboot下载" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
       - name: 发布至release
@@ -130,10 +112,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: Uboot-${{ inputs.board }}-${{ inputs.soc }}
+          files: ${{ env.FIRMWARE }}/*
+          name: Uboot-${{ inputs.board }}-${{ env.FILE_DATE }}
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
-          files: ${{ env.FIRMWARE }}/*
       - name: 删除旧发布的固件
         uses: dev-drprasad/delete-older-releases@master
         if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
