@@ -1,11 +1,11 @@
 --- a/mihomo/Makefile
 +++ b/mihomo/Makefile
-@@ -31,7 +31,7 @@ LUCI_DEPENDS:= \
+@@ -31,7 +31,7 @@ define Package/mihomo
    CATEGORY:=Network
    TITLE:=A rule based proxy in Go.
    URL:=https://wiki.metacubex.one
--  DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle +curl +yq firewall4 +kmod-nft-tproxy +ip-full +kmod-tun +procd-ujail
-+  DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle +curl +yq +kmod-nft-tproxy +ip-full +kmod-tun +procd-ujail
-   USERID:=mihomo=7890:mihomo=7890
+-  DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle +curl +yq firewall4 +ip-full +kmod-inet-diag +kmod-nft-tproxy +kmod-tun
++  DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle +curl +yq +ip-full +kmod-inet-diag +kmod-nft-tproxy +kmod-tun
+   USERID:=root:mihomo=7890
  endef
  
