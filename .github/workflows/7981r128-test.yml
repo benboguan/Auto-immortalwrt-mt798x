@@ -29,7 +29,7 @@ env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
   REPO_BRANCH: R128
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: config/7981R128.config
+  CONFIG_FILE: config/7981R128_test.config
   DIY_P1_SH: script/diy-part1.sh
   DIY_P2_SH: script/diy-part4.sh
   SSH_ACTIONS: false
