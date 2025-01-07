@@ -201,3 +201,36 @@
  	},
  
  	handleSaveApply: null,
+--- a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js
++++ b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js
+@@ -233,7 +233,8 @@ var assoclist = E('table',
+ 				E('th', { 'class': 'th hide-xs' }, _('MAC address')),
+ 				E('th', { 'class': 'th' }, _('Host')),
+ 				E('th', { 'class': 'th' }, '%s / %s'.format(_('Signal'), _('Noise'))),
+-				E('th', { 'class': 'th' }, '%s / %s'.format(_('RX Rate'), _('TX Rate')))
++				E('th', { 'class': 'th' }, '%s / %s'.format(_('RX Rate'), _('TX Rate'))),
++				E('th', { 'class': 'th' }, _('Uptime'))
+ 			])
+ 		]);
+ 
+@@ -292,6 +293,10 @@ hint = name || ipv4 || ipv6 || '?';
+ 					hint = '%s <span class="hide-xs">(%s)</span>'.format(name, ipv4 || ipv6);
+ 				else
+ 					hint = name || ipv4 || ipv6 || '?';
++
++				var timestr = '-';
++				if (bss.connected_time > 0)
++					timestr = '%t'.format(bss.connected_time)
+ 
+ 				var row = [
+ 					E('span', {
+@@ -323,7 +328,8 @@ E('span', {}, [
+ 						E('span', this.wifirate(bss.rx)),
+ 						E('br'),
+ 						E('span', this.wifirate(bss.tx))
+-					])
++					]),
++					timestr
+ 				];
+ 
+ 				if (networks[i].isClientDisconnectSupported() && hasWritePermission) {
