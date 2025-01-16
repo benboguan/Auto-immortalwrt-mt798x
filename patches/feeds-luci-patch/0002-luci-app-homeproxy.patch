@@ -1,10 +1,10 @@
 --- a/luci-app-homeproxy/Makefile
 +++ b/luci-app-homeproxy/Makefile
-@@ -9,7 +9,6 @@ LUCI_DEPENDS:= \
+@@ -8,7 +8,6 @@ LUCI_DEPENDS:= \
+ LUCI_PKGARCH:=all
  LUCI_DEPENDS:= \
  	+sing-box \
- 	+chinadns-ng \
 -	+firewall4 \
- 	+kmod-nft-tproxy \
- 	+unzip
+ 	+kmod-nft-tproxy
  
+ PKG_NAME:=luci-app-homeproxy
