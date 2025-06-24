@@ -30,7 +30,7 @@ env:
   REPO_BRANCH: openwrt-24.10-6.6
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/360T7-1.config
-  DIY_P1_SH: script/diy-part1.sh
+  DIY_P1_SH: script/diy-part24.10.sh
   DIY_P2_SH: script/diy-part6.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false

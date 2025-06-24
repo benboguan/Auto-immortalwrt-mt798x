@@ -12,8 +12,8 @@
 # 修改openwrt登陆地址,把下面的192.168.111.1修改成你想要的就可以了
 sed -i 's/192.168.1.1/192.168.111.1/g' package/base-files/files/bin/config_generate
 
-# 修改主机名字，把360修改你喜欢的就行（不能纯数字或者使用中文）
-sed -i 's/ImmortalWrt/360/g' package/base-files/files/bin/config_generate
+# 修改主机名字，把Qihoo修改你喜欢的就行（不能纯数字或者使用中文）
+sed -i 's/ImmortalWrt/Qihoo/g' package/base-files/files/bin/config_generate
 
 # 修改开源驱动wifi名称
 #sed -i 's/OpenWrt/R30B1_AX3000/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
@@ -45,8 +45,8 @@ sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai
 ###### 取消bootstrap为默认主题 ######
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
-###### 替换iwinfo ######
-#rm -rf package/network/utils/iwinfo && svn co https://github.com/benboguan/immortalwrt-mt798x/branches/R30B1/package/network/utils/iwinfo package/network/utils/iwinfo
+###### 取消myddns_ipv4 ######
+sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
 
 ###### 加载补丁文件 ######
 for packagepatch in $( ls feeds/packages/feeds-package-patch ); do
@@ -145,7 +145,7 @@ pushd package/community
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-pushbot
 
 # Add luci-app-nat6-helper
-git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
+#git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 
 # default luci-theme-argon
 #rm -rf feeds/luci/themes/luci-theme-bootstrap
