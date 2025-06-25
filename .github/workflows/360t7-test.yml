@@ -27,7 +27,7 @@ on:
   
 env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x-6.6
-  REPO_BRANCH: openwrt-24.10-6.6
+  REPO_BRANCH: mt798x-scripts
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/360T7-1.config
   DIY_P1_SH: script/diy-part24.10.sh
@@ -41,7 +41,7 @@ env:
 jobs:
   build:
     name: 编译OpenWrt-immortalwrt-mt798x固件
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: 可用磁盘空间清理 (Ubuntu)
@@ -89,7 +89,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt21.02-6.6'
+        mixkey: 'openwrt-24.10'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
@@ -108,10 +108,6 @@ jobs:
     - name: 加载.config设置
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        # [ -d patches/feeds-package-patch ] && mv -f patches/feeds-package-patch openwrt/feeds/packages/feeds-package-patch
-        # [ -d patches/feeds-luci-patch ] && mv -f patches/feeds-luci-patch openwrt/feeds/small/feeds-luci-patch
-        # [ -d patches/feeds-app-patch ] && mv -f patches/feeds-app-patch openwrt/feeds/feeds_app/feeds-app-patch
-        # [ -d patches/luci-patch ] && mv -f patches/luci-patch openwrt/feeds/luci/luci-patch
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
