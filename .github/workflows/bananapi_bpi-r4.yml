@@ -8,7 +8,7 @@
 #修改以下代码或者开启触发开关都好，要严格按格式对好,前面有多少空格也要看清楚
 #代码里有 name: 后面的内容随便改,冒号后面是有个空格的,如果修改固件名字就要考虑能不能显示出你想要的
 
-name: clt-r30b1-hanwckf 闭源精简固件
+name: bananapi_bpi-r4 闭源精简固件
 
 #permissions: write-all
 #开启写权限，防止无法上传到release
@@ -26,10 +26,10 @@ on:
    #   分,时,日,月,星期。每周 三 20时执行一次 (UTC时间)
   
 env:
-  REPO_URL: https://github.com/benboguan/immortalwrt-mt798x
-  REPO_BRANCH: clt-r30b1
+  REPO_URL: https://github.com/benboguan/immortalwrt-mt798x-6.6
+  REPO_BRANCH: mt7988-6.6-mtwifi
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: config/r30b1-xiao.config
+  CONFIG_FILE: config/bananapi_bpi-r4.config
   DIY_P1_SH: script/diy-part1.sh
   DIY_P2_SH: script/diy-part2.sh
   DIY_P3_SH: script/github-disk-cleanup.sh
@@ -42,32 +42,43 @@ env:
 jobs:
   build:
     name: 编译OpenWrt-immortalwrt-mt798x固件
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
+    - name: 可用磁盘空间清理 (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: true
+        
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
+        
     - name: 准备
       uses: actions/checkout@main
       
-    - name: 清理磁盘空间
+    - name: 检查磁盘空间
       run: |
-        chmod +x script/github-disk-cleanup.sh
-        script/github-disk-cleanup.sh
+           echo "Free space:"
+           df -h
 
     - name: 开始安装编译所需系统
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo -E apt-get update
-        sudo -E apt-get -y install build-essential gawk gcc-multilib flex git gettext libncurses5-dev libssl-dev python3-distutils zlib1g-dev
+        sudo -E apt-get -y install build-essential gawk gcc-multilib flex git gettext libncurses5-dev libssl-dev python3 python3-pip python3-ply python3-docutils python3-pyelftools zlib1g-dev
         sudo -E apt-get -y autoremove
         sudo -E apt-get autoclean
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-
-    - name: 检查空间使用情况
-      if: (!cancelled())
-      run: df -hT
 
     - name: 下载固件源码
       working-directory: /workdir
@@ -79,7 +90,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt212'
+        mixkey: 'openwrt-24.10'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
@@ -114,7 +125,7 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        make download -j8 V=10
+        make download -j8 V=11
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
@@ -159,7 +170,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: r30b1-immortalwrt-mt798x精简固件
+        name: bananapi_bpi-r4-immortalwrt-mt798x精简固件
         path: ${{ env.FIRMWARE }}
 
     - name: 生成release标签
@@ -167,14 +178,14 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         echo -e "✅ immortalwrt-mt798x 源码版本，256M运存建议时常重启一次，不然容易出现爆运存导致卡网" >> release.txt
-        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-clt-r30b1-xiao">> $GITHUB_OUTPUT
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-bananapi_bpi-r4">> $GITHUB_OUTPUT
         touch release.txt
-        echo "clt-r30b1" >> release.txt
+        echo "bananapi_bpi-r4" >> release.txt
         echo "📥 精简固件下载" >> release.txt
         echo "status=success" >>$GITHUB_OUTPUT
 
     - name: 上传固件到release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@master
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -184,7 +195,7 @@ jobs:
         files: ${{ env.FIRMWARE }}/*
 
     - name: 删除旧发布的固件
-      uses: dev-drprasad/delete-older-releases@v0.2.1
+      uses: dev-drprasad/delete-older-releases@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 7
@@ -193,7 +204,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 删除过时工作流程
-      uses: Mattraks/delete-workflow-runs@v2
+      uses: Mattraks/delete-workflow-runs@main
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ github.repository }}
