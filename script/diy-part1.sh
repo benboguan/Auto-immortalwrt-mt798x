@@ -32,7 +32,8 @@ git pull
 echo "src-git feeds_app https://github.com/kenzok8/openwrt-packages" >> feeds.conf.default
 echo "src-git small https://github.com/kenzok8/small" >> feeds.conf.default
 ./scripts/feeds update -a && rm -rf feeds/luci/applications/{luci-app-alist,luci-app-adguardhome,luci-app-ipsec-vpnd,luci-app-ipsec-vpnserver-manyusers,luci-app-smartdns,luci-app-mosdns,luci-app-passwall,luci-app-ssr-plus,luci-app-vssr} && rm -rf feeds/packages/net/{alist,adguardhome,brook,hysteria,mosdns,smartdns,chinadns-ng,v2ray-core,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin,shadowsocks-rust,trojan-go,trojan-plus,trojan}
-rm -rf feeds/small/{luci-app-fchomo,luci-app-bypass,luci-app-nikki,luci-app-passwall2,mihomo,nikki}
+rm -rf feeds/small/{luci-app-fchomo,luci-app-bypass,luci-app-nikki,luci-app-passwall2,luci-app-ssr-plus,mihomo,nikki}
+rm -rf feeds/feeds_app/{luci-app-alist}
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 #rm -rf feeds/luci/applications/luci-app-passwall
