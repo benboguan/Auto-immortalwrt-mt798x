@@ -1,5 +1,14 @@
 --- a/modules/luci-base/po/zh_Hans/base.po
 +++ b/modules/luci-base/po/zh_Hans/base.po
+@@ -1021,7 +1021,7 @@
+ #: modules/luci-compat/luasrc/view/cbi/wireless_modefreq.htm:158
+ #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:502
+ msgid "Band"
+-msgstr "带宽"
++msgstr "频宽"
+ 
+ #: modules/luci-mod-network/htdocs/luci-static/resources/tools/network.js:377
+ msgid "Base device"
 @@ -5725,6 +5725,15 @@
  msgid "References"
  msgstr "引用"
