@@ -31,7 +31,7 @@ git pull
 # Add a feed source
 #echo "src-git feeds_app https://github.com/kenzok8/openwrt-packages" >> feeds.conf.default
 #echo "src-git small https://github.com/kenzok8/small" >> feeds.conf.default
-./scripts/feeds update -a && rm -rf feeds/luci/applications/{luci-app-airwhu}
+./scripts/feeds update -a && rm -rf feeds/luci/{luci-app-airwhu}
 #rm -rf feeds/small/{luci-app-fchomo,luci-app-bypass,luci-app-nikki,luci-app-passwall2,mihomo,nikki}
 #rm -rf feeds/packages/lang/golang
 #git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
