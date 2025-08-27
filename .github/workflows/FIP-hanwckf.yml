@@ -13,6 +13,7 @@ on:
         options:
           - 'mt7981'
           - 'mt7986'
+          - 'mt7987'
           - 'mt7988'
       board:
         required: true
@@ -40,7 +41,7 @@ on:
 
 env:
   REPO_URL: https://github.com/benboguan/bl-mt798x
-  REPO_BRANCH: R128
+  REPO_BRANCH: master
   DIY_P_SH:
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
