@@ -178,7 +178,7 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         echo -e "✅ immortalwrt-mt798x 源码版本，256M运存建议时常重启一次，不然容易出现爆运存导致卡网" >> release.txt
-        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-bananapi_bpi-r4">> $GITHUB_OUTPUT
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-hiveton-h5000m">> $GITHUB_OUTPUT
         touch release.txt
         echo "hiveton-h5000m" >> release.txt
         echo "📥 固件下载" >> release.txt
