@@ -32,7 +32,6 @@ env:
   CONFIG_FILE: config/hiveton-h5000m.config
   DIY_P1_SH: script/diy-part24.10.sh
   DIY_P2_SH: script/diy2-part24.10.sh
-  DIY_P3_SH: script/github-disk-cleanup.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
@@ -90,7 +89,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt-24.10'
+        mixkey: 'openwrt-24.10-6.6'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
