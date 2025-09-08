@@ -35,7 +35,7 @@ echo "src-git small https://github.com/kenzok8/small" >> feeds.conf.default
 rm -rf feeds/small/{luci-app-homeproxy,luci-app-momo,luci-app-fchomo,luci-app-bypass,luci-app-ssr-plus,luci-app-nikki,luci-app-passwall2,momo,mihomo,nikki}
 rm -rf feeds/feeds_app/{luci-app-alist}
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/kenzok8/golang -b 1.25 feeds/packages/lang/golang
+git clone https://github.com/benboguan/golang -b 1.25 feeds/packages/lang/golang
 #rm -rf feeds/luci/applications/luci-app-passwall
 #git clone https://github.com/xiaorouji/openwrt-passwall feeds/luci/applications
 #\rm -rf ./feeds/small/luci-app-homeproxy
