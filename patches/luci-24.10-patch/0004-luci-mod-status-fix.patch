@@ -1,0 +1,61 @@
+--- a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
++++ b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
+@@ -228,7 +228,7 @@ return view.extend({
+ 
+ 				if (chan_analysis.offset_tbl[local_wifi.channel] != null && local_wifi.center_chan1) {
+ 					var center_channels = [local_wifi.center_chan1],
+-					    chan_width_text = local_wifi.htmode.replace(/(V)*H[TE]/,''), /* Handle HT VHT HE */
++					    chan_width_text = local_wifi.htmode.replace(/[EV]*H[TE]/,''), /* Handle HT VHT HE EHT */
+ 					    chan_width = parseInt(chan_width_text)/10;
+ 
+ 					if (local_wifi.center_chan2) {
+--- a/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js
++++ b/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js
+@@ -247,7 +247,8 @@ var assoclist = E('table',
+ 				E('th', { 'class': 'th hide-xs' }, _('MAC address')),
+ 				E('th', { 'class': 'th' }, _('Host')),
+ 				E('th', { 'class': 'th' }, '%s / %s'.format(_('Signal'), _('Noise'))),
+-				E('th', { 'class': 'th' }, '%s / %s'.format(_('RX Rate'), _('TX Rate')))
++				E('th', { 'class': 'th' }, '%s / %s'.format(_('RX Rate'), _('TX Rate'))),
++				E('th', { 'class': 'th' }, _('Uptime'))
+ 			])
+ 		]);
+ 
+@@ -306,6 +307,10 @@ hint = name || ipv4 || ipv6 || '?';
+ 					hint = '%s <span class="hide-xs">(%s)</span>'.format(name, ipv4 || ipv6);
+ 				else
+ 					hint = name || ipv4 || ipv6 || '?';
++
++				const timestr = '-';
++				if (bss.connected_time > 0)
++					timestr = '%t'.format(bss.connected_time)
+ 
+ 				const row = [
+ 					E('span', {
+@@ -337,7 +342,8 @@ E('span', {}, [
+ 						E('span', this.wifirate(bss.rx)),
+ 						E('br'),
+ 						E('span', this.wifirate(bss.tx))
+-					])
++					]),
++					timestr
+ 				];
+ 
+ 				if (bss.vlan) {
+--- a/modules/luci-mod-system/htdocs/luci-static/resources/view/system/led-trigger/netdev.js
++++ b/modules/luci-mod-system/htdocs/luci-static/resources/view/system/led-trigger/netdev.js
+@@ -22,6 +22,14 @@ return baseclass.extend({
+ 		o.modalonly = true;
+ 		o.depends('trigger', 'netdev');
+ 		o.value('link', _('Link On'));
++		o.value('link_10', _('Link 10M On'));
++		o.value('link_100', _('Link 100M On'));
++		o.value('link_1000', _('Link 1G On'));
++		o.value('link_2500', _('Link 2.5G On'));
++		o.value('link_5000', _('Link 5G On'));
++		o.value('link_10000', _('Link 10G On'));
++		o.value('half_duplex', _('Half Duplex'));
++		o.value('full_duplex', _('Full Duplex'));
+ 		o.value('tx', _('Transmit'));
+ 		o.value('rx', _('Receive'));
+ 	}

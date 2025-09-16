@@ -108,6 +108,8 @@ jobs:
     - name: 加载.config设置
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        [ -d patches/luci-24.10-patch/60_wifi.js ] && mv -f patches/luci-24.10-patch/60_wifi.js openwrt/feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js
+        [ -d patches/luci-24.10-patch/0004-luci-mod-status-fix.patch ] && mv -f patches/luci-24.10-patch/0004-luci-mod-status-fix.patch openwrt/feeds/luci/luci-patch
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
