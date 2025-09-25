@@ -247,7 +247,8 @@ return baseclass.extend({
 				E('th', { 'class': 'th hide-xs' }, _('MAC address')),
 				E('th', { 'class': 'th' }, _('Host')),
 				E('th', { 'class': 'th' }, '%s / %s'.format(_('Signal'), _('Noise'))),
-				E('th', { 'class': 'th' }, '%s / %s'.format(_('RX Rate'), _('TX Rate')))
+				E('th', { 'class': 'th' }, '%s / %s'.format(_('RX Rate'), _('TX Rate'))),
+				E('th', { 'class': 'th' }, _('Uptime'))
 			])
 		]);
 
@@ -307,6 +308,10 @@ return baseclass.extend({
 				else
 					hint = name || ipv4 || ipv6 || '?';
 
+				const timestr = '-';
+				if (bss.connected_time > 0)
+					timestr = '%t'.format(bss.connected_time)
+
 				const row = [
 					E('span', {
 						'class': 'ifacebadge',
@@ -337,7 +342,8 @@ return baseclass.extend({
 						E('span', this.wifirate(bss.rx)),
 						E('br'),
 						E('span', this.wifirate(bss.tx))
-					])
+					]),
+					timestr
 				];
 
 				if (bss.vlan) {
