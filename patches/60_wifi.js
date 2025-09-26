@@ -308,11 +308,11 @@ return baseclass.extend({
 				else
 					hint = name || ipv4 || ipv6 || '?';
 
-				const timestr = '-';
+				let timestr = '-';
 				if (bss.connected_time > 0)
 					timestr = '%t'.format(bss.connected_time)
 
-				const row = [
+				let row = [
 					E('span', {
 						'class': 'ifacebadge',
 						'title': networks[i].getI18n(),

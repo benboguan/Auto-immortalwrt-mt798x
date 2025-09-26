@@ -109,7 +109,7 @@ jobs:
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cp -f patches/60_wifi.js openwrt/feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js
-        [ -d patches/luci-24.10-patch ] && mv -f patches/luci-24.10-patch openwrt/feeds/luci/luci-patch
+        [ -d patches/luci-24.10-patch ] && mv -f patches/luci-24.10-patch openwrt/feeds/luci/luci-24.10-patch
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
