@@ -13,7 +13,7 @@
 sed -i 's/192.168.6.1/192.168.112.1/g' package/base-files/files/bin/config_generate
 
 # 修改主机名字，把H5000M修改你喜欢的就行（不能纯数字或者使用中文）
-#sed -i 's/ImmortalWrt/H5000M/g' package/base-files/files/bin/config_generate
+sed -i 's/ImmortalWrt/H5000M/g' package/base-files/files/bin/config_generate
 
 # 修改开源驱动wifi名称
 #sed -i 's/OpenWrt/R30B1_AX3000/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
@@ -21,13 +21,13 @@ sed -i 's/192.168.6.1/192.168.112.1/g' package/base-files/files/bin/config_gener
 # 修改闭源驱动2G wifi名称
 #sed -i 's/ImmortalWrt-2.4G/MSG1500_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b0.dat
-#sed -i 's/$hostname-2.4G/MSG1500_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+sed -i 's/$hostname-2.4G/H5000M_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
 sed -i 's/ImmortalWrt-2.4G/H5000M_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # 修改闭源驱动5G wifi名称
 #sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
-#sed -i 's/$hostname-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+sed -i 's/$hostname-5G/H5000M_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
 sed -i 's/ImmortalWrt-5G/H5000M_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # 修改闭源驱动6G wifi名称
@@ -41,3 +41,11 @@ sed -i 's/ImmortalWrt-5G/H5000M_5G/g' package/mtk/applications/mtwifi-cfg/files/
 
 ###### 取消myddns_ipv4 ######
 sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
+
+###### 加载补丁文件 ######
+for lucipatch24 in $( ls feeds/luci/luci-24.10-patch ); do
+    cd feeds/luci/
+    echo Applying luci-24.10-patch $lucipatch24
+    patch -p1 --no-backup-if-mismatch < luci-24.10-patch/$lucipatch24
+    cd ../..
+done
