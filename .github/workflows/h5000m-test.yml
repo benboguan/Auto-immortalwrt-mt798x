@@ -89,7 +89,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt-24.10.3-6.6-mtwifi'
+        mixkey: 'openwrt-24.10.2-6.6-mtwifi'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
