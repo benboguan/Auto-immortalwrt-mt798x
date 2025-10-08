@@ -27,7 +27,7 @@ on:
   
 env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x-6.6
-  REPO_BRANCH: FIX-WPA3
+  REPO_BRANCH: mt7988-6.6-mtwifi
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/hiveton-h5000m-L2.config
   DIY_P1_SH: script/diy-part24.10.sh
@@ -89,7 +89,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt-24.10.2-6.6-mtwifi'
+        mixkey: 'openwrt-24.10.3-6.6-mtwifi'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
