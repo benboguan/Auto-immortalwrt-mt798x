@@ -8,7 +8,7 @@
 #修改以下代码或者开启触发开关都好，要严格按格式对好,前面有多少空格也要看清楚
 #代码里有 name: 后面的内容随便改,冒号后面是有个空格的,如果修改固件名字就要考虑能不能显示出你想要的
 
-name: hiveton-h5000m 闭源精简固件
+name: hiveton-h5000m 闭源mtk脚本固件
 
 #permissions: write-all
 #开启写权限，防止无法上传到release
@@ -171,7 +171,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: hiveton-h5000m-immortalwrt-mt798x精简固件
+        name: hiveton-h5000m-immortalwrt-mt798x mtk脚本固件
         path: ${{ env.FIRMWARE }}
 
     - name: 创建 release tag
