@@ -364,10 +364,11 @@ return baseclass.extend({
 						}, [ desc ]), row[0].firstChild);
 				}
 
-				if (networks[i].isClientDisconnectSupported() && hasWritePermission) {
-					if (assoclist.firstElementChild.childNodes.length < 6)
-						assoclist.firstElementChild.appendChild(E('th', { 'class': 'th cbi-section-actions' }));
+				/* Add DisConnectSta support by nanchuci */
+				if (assoclist.firstElementChild.childNodes.length < 8)
+					assoclist.firstElementChild.appendChild(E('th', { 'class': 'th cbi-section-actions' }));
 
+				if (networks[i].isClientDisconnectSupported() && hasWritePermission) {
 					if (macfilter != null && macfilter != 'disable' && !maclist[bss.mac]) {
 						row.push(new L.ui.ComboButton('button', {
 								'addlist': macfilter == 'allow' ?  _('Add to Whitelist') : _('Add to Blacklist'),
@@ -390,7 +391,55 @@ return baseclass.extend({
 					}
 				}
 				else {
-					row.push('-');
+					row.push(E('button', {
+						'class': 'cbi-button cbi-button-remove',
+						'click': L.bind(function(wifinet, mac, ev) {
+							const rowElement = dom.parent(ev.currentTarget, '.tr');
+							const button = ev.currentTarget;
+
+							// Update UI feedback
+							if (rowElement) rowElement.style.opacity = 0.5;
+							button.classList.add('spinning');
+							button.disabled = true;
+							button.blur();
+
+							const ifname = wifinet.getIfname();
+							const cmd = rpc.declare({
+								object: 'file',
+								method: 'exec',
+								params: ['command', 'params']
+							});
+
+							const methods = [
+								// 1: iwpriv 2: mwctl
+								['/usr/sbin/iwpriv', [ifname, 'set', 'DisConnectSta=' + mac]],
+								['/usr/sbin/mwctl', [ifname, 'set', 'DisConnectSta=' + mac]]
+							];
+
+							const tryMethods = (index = 0) => {
+								if (index >= methods.length) {
+									if (rowElement) rowElement.style.opacity = 1;
+									button.classList.remove('spinning');
+									button.disabled = false;
+									alert(_('Failed to disconnect client: all methods attempted failed, please check system logs.'));
+									return;
+								}
+
+								cmd(methods[index][0], methods[index][1])
+								.then(result => {
+									if (result.code === 0) {
+										setTimeout(() => window.location.reload(), 1500);
+									} else {
+										tryMethods(index + 1);
+									}
+								})
+								.catch(() => tryMethods(index + 1));
+							};
+
+							tryMethods();
+						}, this, networks[i], bss.mac),
+						'title': _('Disconnect client: %s').format(bss.mac)
+					}, [ _('Disconnect') ]));
 				}
 
 				rows.push(row);

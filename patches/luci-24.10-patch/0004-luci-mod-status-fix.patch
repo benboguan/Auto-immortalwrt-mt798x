@@ -26,3 +26,20 @@
  		o.value('tx', _('Transmit'));
  		o.value('rx', _('Receive'));
  	}
+--- a/modules/luci-base/po/zh_Hans/base.po
++++ b/modules/luci-base/po/zh_Hans/base.po
+@@ -2793,6 +2793,14 @@
+ #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js:372
+ msgid "Disconnect"
+ msgstr "断开"
++
++#: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js:424
++msgid "Failed to disconnect client: all methods attempted failed, please check system logs."
++msgstr "断开客户端失败: 所有方法都尝试失败，请检查系统日志。"
++
++#: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js:441
++msgid "Disconnect client: %s"
++msgstr "断开客户端：%s"
+ 
+ #: modules/luci-compat/luasrc/model/network/proto_ncm.lua:64
+ msgid "Disconnection attempt failed"
