@@ -27,7 +27,7 @@ on:
   
 env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x-6.6
-  REPO_BRANCH: mt7988-6.6-mtwifi
+  REPO_BRANCH: FIX-STAINFO
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/hiveton-h5000m-L2.config
   DIY_P1_SH: script/diy-part24.10.sh
