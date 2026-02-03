@@ -43,9 +43,9 @@ sed -i 's/ImmortalWrt-5G/H5000M_5G/g' package/mtk/applications/mtwifi-cfg/files/
 sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
 
 ###### 加载补丁文件 ######
-for lucipatch24 in $( ls feeds/luci/luci-24.10-patch ); do
-    cd feeds/luci/
-    echo Applying luci-24.10-patch $lucipatch24
-    patch -p1 --no-backup-if-mismatch < luci-24.10-patch/$lucipatch24
-    cd ../..
-done
+#for lucipatch24 in $( ls feeds/luci/luci-24.10-patch ); do
+#    cd feeds/luci/
+#    echo Applying luci-24.10-patch $lucipatch24
+#    patch -p1 --no-backup-if-mismatch < luci-24.10-patch/$lucipatch24
+#    cd ../..
+#done

@@ -8,7 +8,7 @@
 #修改以下代码或者开启触发开关都好，要严格按格式对好,前面有多少空格也要看清楚
 #代码里有 name: 后面的内容随便改,冒号后面是有个空格的,如果修改固件名字就要考虑能不能显示出你想要的
 
-name: hiveton-h5000m 闭源精简固件02
+name: hiveton-h5000m-cfg80211 闭源测试固件
 
 #permissions: write-all
 #开启写权限，防止无法上传到release
@@ -27,7 +27,7 @@ on:
   
 env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt798x-6.6
-  REPO_BRANCH: FIX-STAINFO
+  REPO_BRANCH: openwrt-25.12
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/hiveton-h5000m-L2.config
   DIY_P1_SH: script/diy-part24.10.sh
@@ -89,7 +89,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt-24.10.3-6.6-mtwifi'
+        mixkey: 'openwrt-25.12-6.12-mtwifi'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
@@ -171,7 +171,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: hiveton-h5000m-immortalwrt-mt798x精简固件
+        name: hiveton-h5000m-cfg80211_immortalwrt-25.12测试固件
         path: ${{ env.FIRMWARE }}
 
     - name: 创建 release tag
@@ -181,7 +181,7 @@ jobs:
         echo -e "✅ immortalwrt-mt798x 源码版本，256M运存建议时常重启一次，不然容易出现爆运存导致卡网" >> release.txt
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")-hiveton-h5000m">> $GITHUB_OUTPUT
         touch release.txt
-        echo "hiveton-h5000m-L" >> release.txt
+        echo "hiveton-h5000m-cfg80211" >> release.txt
         echo "📥 固件下载" >> release.txt
         echo "status=success" >>$GITHUB_OUTPUT
 
