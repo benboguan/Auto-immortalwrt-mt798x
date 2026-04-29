@@ -21,10 +21,12 @@ sed -i 's/ImmortalWrt/R128/g' package/base-files/files/bin/config_generate
 # 修改闭源驱动2G wifi名称
 sed -i 's/$hostname-2.4G/R128_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
 sed -i 's/OpenWRT-2.4G/R128_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+sed -i 's/ImmortalWrt-2.4G/R128_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # 修改闭源驱动5G wifi名称
 sed -i 's/$hostname-5G/R128_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
 sed -i 's/OpenWRT-5G/R128_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+sed -i 's/ImmortalWrt-5G/R128_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # 添加个性信息
 #sed -i 's/R22.8.2/R22.8.2 by nanchuci/g' package/lean/default-settings/files/zzz-default-settings
@@ -33,7 +35,7 @@ sed -i 's/OpenWRT-5G/R128_5G/g' package/mtk/drivers/wifi-profile/files/common/mt
 #rm -rf ./package/base-files/files/etc/banne && cd .. && cp -f ./banner openwrt/package/base-files/files/etc/ && cd openwrt
 
 # 更改时区
-sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
+#sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
 
 #修正连接数
 #sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf
