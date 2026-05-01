@@ -108,8 +108,9 @@ jobs:
     - name: 加载.config设置
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        cp -f patches/channel_analysis.js openwrt/feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/channel_analysis.js
         [ -d patches/feeds-package-patch ] && mv -f patches/feeds-package-patch openwrt/feeds/packages/feeds-package-patch
-        [ -d patches/feeds-luci-patch ] && mv -f patches/feeds-luci-patch openwrt/feeds/small/feeds-luci-patch
+        # [ -d patches/feeds-luci-patch ] && mv -f patches/feeds-luci-patch openwrt/feeds/small/feeds-luci-patch
         # [ -d patches/feeds-app-patch ] && mv -f patches/feeds-app-patch openwrt/feeds/feeds_app/feeds-app-patch
         [ -d patches/luci-patch ] && mv -f patches/luci-patch openwrt/feeds/luci/luci-patch
         cp patches/9921-support-SX-7981R128-for-mtk-sdk-v7.6.6.1.patch openwrt/target/linux/mediatek/patches-5.4
