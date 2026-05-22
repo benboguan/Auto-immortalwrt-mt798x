@@ -28,10 +28,10 @@
  	}
 --- a/modules/luci-base/po/zh_Hans/base.po
 +++ b/modules/luci-base/po/zh_Hans/base.po
-@@ -2793,6 +2793,14 @@
+@@ -2849,6 +2849,14 @@
  #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js:372
  msgid "Disconnect"
- msgstr "断开"
+ msgstr "断开连接"
 +
 +#: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js:424
 +msgid "Failed to disconnect client: all methods attempted failed, please check system logs."
