@@ -49,3 +49,16 @@ for lucipatch24 in $( ls feeds/luci/luci-24.10-patch ); do
     patch -p1 --no-backup-if-mismatch < luci-24.10-patch/$lucipatch24
     cd ../..
 done
+
+# Clone community packages to package/community
+mkdir -p package/mtk/applications
+pushd package/mtk/applications
+
+# add luci-app-wifi7
+git clone --depth=1 https://github.com/benboguan/luci-app-wifi7
+
+# Add luci-app-w1700k-fancontrol
+git clone --depth=1 https://github.com/benboguan/luci-app-w1700k-fancontrol
+
+# Add luci-app-fancontrol
+git clone --depth=1 https://github.com/rockjake/luci-app-fancontrol
