@@ -385,7 +385,8 @@ return baseclass.extend({
 					else {
 						row.push(E('button', {
 							'class': 'cbi-button cbi-button-remove',
-							'click': L.bind(this.handleDelClient, this, networks[i], bss.mac)
+							'click': L.bind(this.handleDelClient, this, networks[i], bss.mac),
+							'title': _('Disconnect client: %s').format(bss.mac)
 						}, [ _('Disconnect') ]));
 					}
 				}
@@ -410,9 +411,9 @@ return baseclass.extend({
 							});
 
 							const methods = [
-								// 1: iwpriv 2: mwctl
-								['/usr/sbin/iwpriv', [ifname, 'set', 'DisConnectSta=' + mac]],
-								['/usr/sbin/mwctl', [ifname, 'set', 'DisConnectSta=' + mac]]
+								// 1: mwctl 2: iwpriv
+								['/usr/sbin/mwctl', [ifname, 'set', 'DisConnectSta=' + mac]],
+								['/usr/sbin/iwpriv', [ifname, 'set', 'DisConnectSta=' + mac]]
 							];
 
 							const tryMethods = (index = 0) => {

@@ -28,7 +28,7 @@
  	}
 --- a/modules/luci-base/po/zh_Hans/base.po
 +++ b/modules/luci-base/po/zh_Hans/base.po
-@@ -2849,6 +2849,14 @@
+@@ -2858,6 +2858,14 @@
  #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js:372
  msgid "Disconnect"
  msgstr "断开连接"
