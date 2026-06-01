@@ -21,19 +21,21 @@ sed -i 's/ImmortalWrt/H5000M/g' package/base-files/files/bin/config_generate
 # 修改闭源驱动2G wifi名称
 #sed -i 's/ImmortalWrt-2.4G/MSG1500_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b0.dat
-#sed -i 's/$hostname-2.4G/H5000M_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+sed -i 's/ImmortalWrt_2.4G/H5000M_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.uc
+sed -i 's/ImmortalWrt_2.4G/H5000M_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.sh
 sed -i 's/ImmortalWrt-2.4G/H5000M_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # 修改闭源驱动5G wifi名称
 #sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
-#sed -i 's/$hostname-5G/H5000M_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+sed -i 's/ImmortalWrt_5G/H5000M_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.uc
+sed -i 's/ImmortalWrt_5G/H5000M_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.sh
 sed -i 's/ImmortalWrt-5G/H5000M_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # 修改闭源驱动6G wifi名称
 #sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
-#sed -i 's/$hostname-5G/MSG1500_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mtk.sh
+#sed -i 's/ImmortalWrt_6G/H5000M_6G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.uc
 #sed -i 's/ImmortalWrt-6G/H5000M_6G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # 更改时区
@@ -58,4 +60,4 @@ pushd package/mtk/applications
 # git clone --depth=1 https://github.com/benboguan/luci-app-wifi7
 
 # add luci-app-wifimgr
-git clone --depth=1 https://github.com/benboguan/mt7996-wifi7-manager
+#git clone --depth=1 https://github.com/benboguan/mt7996-wifi7-manager
