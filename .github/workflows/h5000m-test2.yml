@@ -8,7 +8,7 @@
 #修改以下代码或者开启触发开关都好，要严格按格式对好,前面有多少空格也要看清楚
 #代码里有 name: 后面的内容随便改,冒号后面是有个空格的,如果修改固件名字就要考虑能不能显示出你想要的
 
-name: hiveton-h5000m-cfg80211 闭源测试固件
+name: hiveton-h5000m-cfg80211 闭源固件
 
 #permissions: write-all
 #开启写权限，防止无法上传到release
@@ -31,7 +31,7 @@ env:
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/hiveton-h5000m-L2.config
   DIY_P1_SH: script/diy-part24.10.sh
-  DIY_P2_SH: script/diy2-part24.10.sh
+  DIY_P2_SH: script/diy-part6.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
@@ -41,7 +41,7 @@ env:
 jobs:
   build:
     name: 编译OpenWrt-immortalwrt-mt798x固件
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
     - name: 可用磁盘空间清理 (Ubuntu)
@@ -49,7 +49,7 @@ jobs:
       with:
         # this might remove tools that are actually needed,
         # if set to "true" but frees about 6 GB
-        tool-cache: true
+        preinstalled-runtimes: true
         
         # all of these default to true, but feel free to set to
         # "false" if necessary for your workflow
@@ -89,7 +89,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt-25.12-6.12-mtwifi'
+        mixkey: 'openwrt-25.12.6-6.12-mtwifi'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
@@ -108,8 +108,6 @@ jobs:
     - name: 加载.config设置
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        cp -f patches/60_wifi.js openwrt/feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/60_wifi.js
-        [ -d patches/luci-24.10-patch ] && mv -f patches/luci-24.10-patch openwrt/feeds/luci/luci-24.10-patch
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
@@ -171,7 +169,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: hiveton-h5000m-cfg80211_immortalwrt-25.12测试固件
+        name: hiveton-h5000m-cfg80211_immortalwrt-25.12固件
         path: ${{ env.FIRMWARE }}
 
     - name: 创建 release tag
