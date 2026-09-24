@@ -21,14 +21,14 @@ sed -i 's/ImmortalWrt/H5000M/g' package/base-files/files/bin/config_generate
 # 修改闭源驱动2G wifi名称
 #sed -i 's/ImmortalWrt-2.4G/MSG1500_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b0.dat
-sed -i 's/ImmortalWrt_2.4G/H5000M_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.uc
+#sed -i 's/ImmortalWrt_2.4G/H5000M_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.uc
 #sed -i 's/ImmortalWrt_2.4G/H5000M_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.sh
 sed -i 's/ImmortalWrt-2.4G/H5000M_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 # 修改闭源驱动5G wifi名称
 #sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
-sed -i 's/ImmortalWrt_5G/H5000M_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.uc
+#sed -i 's/ImmortalWrt_5G/H5000M_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.uc
 #sed -i 's/ImmortalWrt_5G/H5000M_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.sh
 sed -i 's/ImmortalWrt-5G/H5000M_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
@@ -61,3 +61,25 @@ pushd package/mtk/applications
 
 # add luci-app-wifimgr
 #git clone --depth=1 https://github.com/benboguan/mt7996-wifi7-manager
+
+popd
+
+###########################
+# 引入 luci-app 插件
+###########################
+mkdir -p ./tmp
+# 先下载保存为本地zip文件
+wget -q -O ./tmp/repo.zip https://github.com/MedyMa/luci-app/archive/refs/heads/main.zip
+# 解压磁盘上的zip文件，不是管道流
+unzip -q ./tmp/repo.zip -d ./tmp/
+cp -r ./tmp/luci-app-main/Luci-app/luci-app-adguardhome package/mtk/applications
+cp -r ./tmp/luci-app-main/Luci-app/luci-app-modemband package/mtk/applications
+cp -r ./tmp/luci-app-main/Luci-app/luci-app-traffic package/mtk/applications
+rm -rf ./tmp
+
+# 更新feeds索引，注意：禁止执行 feeds install -a
+./scripts/feeds update -i
+
+# 调试打印，CI可以看到插件是否成功拉取
+echo "==== verify luci-app-traffic package ===="
+ls -la package/mtk/applications/luci-app-traffic
