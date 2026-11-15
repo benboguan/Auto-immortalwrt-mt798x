@@ -23,21 +23,21 @@ sed -i 's/ImmortalWrt/H5000M/g' package/base-files/files/bin/config_generate
 #sed -i 's/MT7981_AX3000_2.4G/R30B1_AX3000_2.4G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b0.dat
 #sed -i 's/ImmortalWrt_2.4G/H5000M_2.4G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.sh
 #sed -i 's/ImmortalWrt-2.4G/H5000M_2.4G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
-sed -i 's/ImmortalWrt-2.4G/H5000M_2.4G/g' package/mtk/applications/mtwifi-ucode/files/lib/wifi/mtwifi.uc
+sed -i 's/ImmortalWrt-2.4G/H5000M_2.4G/g' package/mtk/applications/mtwifi-scripts/files-ucode/lib/wifi/mtwifi.uc
 
 # 修改闭源驱动5G wifi名称
 #sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
 #sed -i 's/ImmortalWrt_5G/H5000M_5G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.sh
 #sed -i 's/ImmortalWrt-5G/H5000M_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
-sed -i 's/ImmortalWrt-5G/H5000M_5G/g' package/mtk/applications/mtwifi-ucode/files/lib/wifi/mtwifi.uc
+sed -i 's/ImmortalWrt-5G/H5000M_5G/g' package/mtk/applications/mtwifi-scripts/files-ucode/lib/wifi/mtwifi.uc
 
 # 修改闭源驱动6G wifi名称
 #sed -i 's/ImmortalWrt-5G/MSG1500_5G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 #sed -i 's/MT7981_AX3000_5G/R30B1_AX3000_5G/g' package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
 #sed -i 's/ImmortalWrt_6G/H5000M_6G/g' package/mtk/drivers/wifi-profile/files/common/mt79xx/lib/wifi/mac80211.uc
 #sed -i 's/ImmortalWrt-6G/H5000M_6G/g' package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
-#sed -i 's/ImmortalWrt-6G/H5000M_6G/g' package/mtk/applications/mtwifi-ucode/files/lib/wifi/mtwifi.uc
+#sed -i 's/ImmortalWrt-6G/H5000M_6G/g' package/mtk/applications/mtwifi-scripts/files-ucode/lib/wifi/mtwifi.uc
 
 # 更改时区
 #sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
@@ -98,8 +98,7 @@ pushd package/mtk/applications
 # Add luci-app-nat6-helper
 #git clone --depth=1 https://github.com/Ausaci/luci-app-nat6-helper
 
-# Add luci-theme-alpha
-#git clone --depth=1 https://github.com/derisamedia/luci-theme-alpha
-#git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
+# Add luci-theme-vantage
+git clone --depth=1 https://github.com/anothaDev/luci-theme-vantage
 
 popd

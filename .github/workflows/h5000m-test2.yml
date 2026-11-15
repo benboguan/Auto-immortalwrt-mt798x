@@ -26,7 +26,7 @@ on:
    #   分,时,日,月,星期。每周 三 20时执行一次 (UTC时间)
   
 env:
-  REPO_URL: https://github.com/benboguan/immortalwrt-mt798x-6.6
+  REPO_URL: https://github.com/benboguan/immortalwrt-mt799x
   REPO_BRANCH: openwrt-25.12-mtwifi
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/hiveton-h5000m-L.config
@@ -89,7 +89,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt-25.12.7-6.12-mtwifi'
+        mixkey: 'openwrt-25.12.8-6.12-mtwifi'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
