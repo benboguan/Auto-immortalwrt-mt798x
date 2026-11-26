@@ -27,7 +27,7 @@ on:
   
 env:
   REPO_URL: https://github.com/benboguan/immortalwrt-mt799x
-  REPO_BRANCH: openwrt-25.12-mtwifi
+  REPO_BRANCH: openwrt-25.12-mtwifi1
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/hiveton-h5000m-L.config
   DIY_P1_SH: script/diy-part24.10.sh
@@ -89,7 +89,7 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: 'openwrt-25.12.8-6.12-mtwifi'
+        mixkey: 'openwrt-25.12.9-6.12-mtwifi'
         prefix: ${{ github.workspace }}/openwrt
 
     - name: 加载feeds跟自定义插件
